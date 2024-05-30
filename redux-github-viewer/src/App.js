@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import HeaderSection from "./components/molecules/headerPage";
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  html{
+    font-family: 'Lato', 'Lucida Grande', "Lucida Sans Unicode", Tahoma, Sans-Serif;
+    line-height: 1.5;
+    font-size: 14px;
+    padding: 0px;
+    margin: 0px;
+  };
+  a{
+    color: rgb(3,102,214);
+    text-decration:none;
+  };
+  *,*:before,*:after {
+    box-sizing: border-box;
+  }
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <HeaderSection />
+    </>
   );
 }
 
