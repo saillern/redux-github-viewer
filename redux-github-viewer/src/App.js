@@ -1,5 +1,7 @@
 import React from "react";
-import HeaderSection from "./components/molecules/headerPage";
+import { useState } from "react";
+import HeaderSection from "./components/organisms/headerPage";
+import TabSection from "./components/organisms/organismsParts";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -16,14 +18,26 @@ const GlobalStyle = createGlobalStyle`
   };
   *,*:before,*:after {
     box-sizing: border-box;
+  };
+  li{
+    list-style-type:none;
+  };
+  ul{
+    padding:0px;
+    margin:0px;
   }
 `;
 
 function App() {
+  const [openMenu, setopenMenu] = useState(false);
+  function MenubarClick() {
+    setopenMenu(!openMenu);
+  }
   return (
     <>
       <GlobalStyle />
-      <HeaderSection />
+      <HeaderSection openMenu={openMenu} MenubarClick={MenubarClick} />
+      <TabSection />
     </>
   );
 }

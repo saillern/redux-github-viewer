@@ -9,3 +9,12 @@ export const LargeFont = styled.h1`
 export const ListFont = styled.a`
   font-size: 1.1rem;
 `;
+
+export const InputText = styled.input`
+  padding: 8px;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1rem;
+  width: 100%;
+`;
