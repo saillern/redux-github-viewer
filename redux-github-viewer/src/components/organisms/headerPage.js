@@ -69,8 +69,6 @@ const MENU_LIST = {
 
 function OpenMenubar({ IsOpen }) {
   if (IsOpen) {
-    return;
-  } else {
     const menu = Object.values(MENU_LIST);
     return (
       <MenubarList>
@@ -80,6 +78,8 @@ function OpenMenubar({ IsOpen }) {
         })}
       </MenubarList>
     );
+  } else {
+    return;
   }
 }
 export default function HeaderSection({ openMenu, MenubarClick }) {
