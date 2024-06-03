@@ -94,10 +94,79 @@ const WarningButton = styled(ButtonTemplate)`
   }
 `;
 
+const TableScroll = styled.div`
+  overflow: scroll;
+`;
+
+const IssueTableFormat = styled.table`
+  border: 1px solid rgb(225,228,232);
+  border-radius: 6px;
+  thead{
+    tr{
+      th{
+        padding:8px;
+        text-align:left;
+        min-width:10rem;
+        border-bottom:1px solid rgb(225,228,232);
+
+      }
+      td{
+        padding:8px;
+        text-align:left;
+        min-width:10rem;
+        border-bottom:1px solid rgb(225,228,232);
+
+      }
+      th:first-child{
+        min-width:auto;
+      }
+    }
+  }
+`;
+
+
 const TAB_PAGES = {
   ISSUE: "Issue",
   PULL_REQUEST: "Pull Request",
 };
+
+const ISSUE_TABLE_HEADER = {
+  TEXT:"",
+  STATUS:"ステータス",
+  AUTHOR:"作成者",
+  CREATED:"作成日付",
+  UPDATED:"更新日付"
+};
+
+const ISSUE_LIST =
+{
+
+  Issue1:{
+    TEXT:"A bug in Top Page",
+    STATUS:"Open",
+    AUTHOR:"",
+    CREATED:"06-02-2024",
+    UPDATED:"06-02-2024"
+  },
+  Issue2:{
+    TEXT:"A problem of performance in Top Page",
+    STATUS:"Open",
+    AUTHOR:"",
+    CREATED:"06-02-2024",
+    UPDATED:"06-02-2024"
+  },
+  Issue3:{
+    TEXT:"fix layout",
+    STATUS:"Open",
+    AUTHOR:"",
+    CREATED:"06-02-2024",
+    UPDATED:"06-02-2024"
+  }
+}
+
+const PARAMS = {
+  IssueNum : 3,
+}
 
 function TabPage({ name, IsActive, onTabClick }) {
   if (name === TAB_PAGES.ISSUE) {
@@ -114,12 +183,54 @@ function TabPage({ name, IsActive, onTabClick }) {
     );
   }
 }
+
+function IssueListRow(props){
+  return(
+    <tr>
+      <th>
+        <input type="checkbox"></input>
+      </th>
+      <th>{props.issueParam.TEXT}</th>
+      <th>{props.issueParam.STATUS}</th>
+      <th>{props.issueParam.AUTHOR}</th>
+      <th>{props.issueParam.CREATED}</th>
+      <th>{props.issueParam.UPDATED}</th>
+    </tr>
+  )
+};
+
+function DsplayIssueTable({IsIssueTable}){
+  if(IsIssueTable) {
+    return(
+          <thead>
+            <tr>
+              <th>
+                <input type="checkbox"></input>
+              </th>
+              {
+                Object.values(ISSUE_TABLE_HEADER).map(value =>{
+                  return(
+                    <th>{value}</th>
+                  );
+                })
+              }
+            </tr>
+              {
+                Object.keys(ISSUE_LIST).map(key => 
+                  <IssueListRow key={key} issueParam={ISSUE_LIST[key]} />
+                )
+              }
+          </thead>
+    );
+  }
+}
+
 export default function TabSection() {
   const [IsIssuePage, setIsIssuePage] = useState(true);
+  const [IsIssueTable, setIsIssueTable] = useState(true);
   function TabPageClick() {
     setIsIssuePage(!IsIssuePage);
   }
-
   return (
     <>
       <MainPage>
@@ -149,8 +260,16 @@ export default function TabSection() {
               <WarningButton>Delete </WarningButton>
             </MainHeaderBtn>
           </MainHeader>
+      <TableScroll>
+        <IssueTableFormat>
+          <DsplayIssueTable IsIssueTable={IsIssueTable} />
+        </IssueTableFormat>
+      </TableScroll>
         </MainSection>
       </MainPage>
     </>
   );
 }
+
+
+

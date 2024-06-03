@@ -29,9 +29,9 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [openMenu, setopenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
   function MenubarClick() {
-    setopenMenu(!openMenu);
+    setOpenMenu(!openMenu);
   }
   return (
     <>
