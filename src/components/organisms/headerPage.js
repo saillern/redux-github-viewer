@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import { HeaderTitle, HeaderListText } from "../molecules/Header";
 import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons";

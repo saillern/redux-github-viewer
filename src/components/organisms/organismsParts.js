@@ -1,8 +1,11 @@
 import React from "react";
-import { useState } from "react";
 import styled from "styled-components";
 import { Btn } from "../atoms/Button";
 import { InputText } from "../atoms/Text";
+import * as Actions from "../../pages/Actions";
+import {initialState} from "../../pages/Reducer";
+import store from "../../index";
+
 
 const MainPage = styled.div`
   max-width: 896px;
@@ -101,25 +104,31 @@ const TableScroll = styled.div`
 const IssueTableFormat = styled.table`
   border: 1px solid rgb(225,228,232);
   border-radius: 6px;
-  thead{
-    tr{
-      th{
-        padding:8px;
-        text-align:left;
-        min-width:10rem;
-        border-bottom:1px solid rgb(225,228,232);
-
-      }
-      td{
-        padding:8px;
-        text-align:left;
-        min-width:10rem;
-        border-bottom:1px solid rgb(225,228,232);
-
-      }
-      th:first-child{
-        min-width:auto;
-      }
+  td{
+    padding:8px;
+    text-align:left;
+    min-width:10rem;
+    border-bottom:1px solid rgb(225,228,232);
+  }
+  th{
+    padding:8px;
+    text-align:left;
+    min-width:10rem;
+    border-bottom:1px solid rgb(225,228,232);
+  }
+  .outline{
+    width:140rem;
+  }
+  th:first-child{
+    min-width:auto;
+  }
+  td:first-child{
+    min-width:auto;
+  }
+  tr{
+    cursor:pointer; 
+    &:hover td{
+    background-color:rgb(198,218,230,0.25);
     }
   }
 `;
@@ -157,16 +166,13 @@ const ISSUE_LIST =
   },
   Issue3:{
     TEXT:"fix layout",
-    STATUS:"Open",
+    STATUS:"Close",
     AUTHOR:"",
     CREATED:"06-02-2024",
     UPDATED:"06-02-2024"
   }
 }
 
-const PARAMS = {
-  IssueNum : 3,
-}
 
 function TabPage({ name, IsActive, onTabClick }) {
   if (name === TAB_PAGES.ISSUE) {
@@ -175,9 +181,10 @@ function TabPage({ name, IsActive, onTabClick }) {
         <TabCardText>{TAB_PAGES.ISSUE}</TabCardText>
       </TabCard>
     );
-  } else {
+  }
+  else if(name === TAB_PAGES.PULL_REQUEST) {
     return (
-      <TabCard $IsActive={!IsActive} onClick={onTabClick}>
+      <TabCard $IsActive={IsActive} onClick={onTabClick}>
         <TabCardText>{TAB_PAGES.PULL_REQUEST}</TabCardText>
       </TabCard>
     );
@@ -187,21 +194,23 @@ function TabPage({ name, IsActive, onTabClick }) {
 function IssueListRow(props){
   return(
     <tr>
-      <th>
+      <td>
         <input type="checkbox"></input>
-      </th>
-      <th>{props.issueParam.TEXT}</th>
-      <th>{props.issueParam.STATUS}</th>
-      <th>{props.issueParam.AUTHOR}</th>
-      <th>{props.issueParam.CREATED}</th>
-      <th>{props.issueParam.UPDATED}</th>
+      </td>
+      <td className="outline">{props.issueParam.TEXT}</td>
+      <td>{props.issueParam.STATUS}</td>
+      <td>{props.issueParam.AUTHOR}</td>
+      <td>{props.issueParam.CREATED}</td>
+      <td>{props.issueParam.UPDATED}</td>
     </tr>
   )
 };
 
-function DsplayIssueTable({IsIssueTable}){
-  if(IsIssueTable) {
+function DsplayIssueTable({isIssuePage}){
+  if(isIssuePage) {
     return(
+      <TableScroll>
+        <IssueTableFormat>
           <thead>
             <tr>
               <th>
@@ -221,55 +230,75 @@ function DsplayIssueTable({IsIssueTable}){
                 )
               }
           </thead>
+        </IssueTableFormat>
+      </TableScroll>
     );
   }
 }
 
-export default function TabSection() {
-  const [IsIssuePage, setIsIssuePage] = useState(true);
-  const [IsIssueTable, setIsIssueTable] = useState(true);
-  function TabPageClick() {
-    setIsIssuePage(!IsIssuePage);
+
+
+function DisplayIssueHeader({isIssueHeader}){
+  if(isIssueHeader){
+    return(
+      <MainHeader>
+        <h2>Issue</h2>
+        <InputForm>
+          <InputWindow
+            type="input"
+            placeholder="issue名で検索"
+          ></InputWindow>
+        </InputForm>
+        <MainHeaderBtn>
+          <PrimaryButton> New </PrimaryButton>
+          <WarningButton>Delete </WarningButton>
+        </MainHeaderBtn>
+      </MainHeader>
+    );
   }
+}
+
+
+//const PARAMS = {
+//  IssueNum : 3,
+//}
+
+let isIssuePage = initialState.isIssuePage
+let isPullrequestPage = initialState.isPullrequestPage
+export default function TabSection() {
+
+  function issuePageClick() {
+    store.dispatch(Actions.moveIssue());
+  }
+  function pullrequestPageClick() {
+    store.dispatch(Actions.movePullRequest());
+  }
+  console.log(store.getState());
+  const values = store.getState();
+  isIssuePage = values.isIssuePage;
+  isPullrequestPage = values.isPullrequestPage;
+  
   return (
     <>
       <MainPage>
         <MainTab>
           <TabPage
             name={TAB_PAGES.ISSUE}
-            IsActive={IsIssuePage}
-            onTabClick={TabPageClick}
+            IsActive={isIssuePage}
+            onTabClick={issuePageClick}
           />
           <TabPage
             name={TAB_PAGES.PULL_REQUEST}
-            IsActive={IsIssuePage}
-            onTabClick={TabPageClick}
+            IsActive={isPullrequestPage}
+            onTabClick={pullrequestPageClick}
           />
         </MainTab>
         <MainSection>
-          <MainHeader>
-            <h2>Issue</h2>
-            <InputForm>
-              <InputWindow
-                type="input"
-                placeholder="issue名で検索"
-              ></InputWindow>
-            </InputForm>
-            <MainHeaderBtn>
-              <PrimaryButton> New </PrimaryButton>
-              <WarningButton>Delete </WarningButton>
-            </MainHeaderBtn>
-          </MainHeader>
-      <TableScroll>
-        <IssueTableFormat>
-          <DsplayIssueTable IsIssueTable={IsIssueTable} />
-        </IssueTableFormat>
-      </TableScroll>
+          <DisplayIssueHeader isIssueHeader={isIssuePage}/>
+          <DsplayIssueTable isIssuePage={isIssuePage} />
         </MainSection>
       </MainPage>
     </>
   );
 }
-
-
 
