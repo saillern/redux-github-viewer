@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import IssuePage from "./components/pages/IssuePage";
 import PullRequestPage from "./components/pages/PullRequestPage";
 import { GlobalStyle } from "./App";
-import { HeaderSection } from "./components/organisms/HeaderPart";
+import { HeaderSection } from "./components/organisms/HeaderSection";
 
 const router = createBrowserRouter([
   {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import HeaderSection from "../organisms/HeaderPart";
+import HeaderSection from "../organisms/HeaderSection";
 import { GlobalStyle } from "../../App";
 
 const PullRequestSection = styled.div`
