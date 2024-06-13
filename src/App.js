@@ -1,10 +1,12 @@
 import React from "react";
-import { useState } from "react";
-import HeaderSection from "./components/organisms/headerPage";
-import TabSection from "./components/organisms/organismsParts";
+import HeaderSection from "./components/organisms/HeaderPart";
+import BodySection from "./components/pages/MainPage";
 import { createGlobalStyle } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
+  body{
+    margin: 0;  
+  }
   html{
     font-family: Lato, "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;
     line-height: 1.5;
@@ -16,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     color: rgb(3,102,214);
     text-decration:none;
   }
+
   *,*:before,*:after {
     box-sizing: border-box;
   }
@@ -29,15 +32,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [openMenu, setOpenMenu] = useState(false);
-  function MenubarClick() {
-    setOpenMenu(!openMenu);
-  }
   return (
     <>
       <GlobalStyle />
-      <HeaderSection openMenu={openMenu} MenubarClick={MenubarClick} />
-      <TabSection />
+      <HeaderSection />
+      <BodySection />
     </>
   );
 }

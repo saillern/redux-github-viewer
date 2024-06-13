@@ -1,20 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import {Provider} from 'react-redux';
-import {createStore} from 'redux'
-import pageTransition from './pages/Reducer';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { Provider } from "react-redux";
+import { store } from "./features/Store";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import IssuePage from "./components/pages/IssuePage";
+import PullRequestPage from "./components/pages/PullRequestPage";
 
-const store = createStore(
-    pageTransition,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "issue",
+    element: <IssuePage />,
+  },
+  {
+    path: "pull-request",
+    element: <PullRequestPage />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <App />
-    </Provider>,document.getElementById('root')
+    <RouterProvider router={router} />
+  </Provider>,
+  document.getElementById("root"),
 );
-
-store.subscribe(root.render);
-export default store;
