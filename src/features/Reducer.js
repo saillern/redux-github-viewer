@@ -14,15 +14,5 @@ export const activeMenuBar = createSlice({
 
 export const { handleMenuBar } = activeMenuBar.actions;
 export const openMenuState = (state) => state.menuState.value;
-console.log(openMenuState);
-console.log(activeMenuBar.actions.handleMenuBar());
-
-console.log(handleMenuBar());
-
-const newState = activeMenuBar.reducer(
-  { value: false },
-  activeMenuBar.actions.handleMenuBar(),
-);
-console.log(newState);
 
 export default activeMenuBar.reducer;
