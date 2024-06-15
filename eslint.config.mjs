@@ -5,7 +5,6 @@ import eslintConfigPrettier from "eslint-config-prettier";
 
 export default [
   { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
   {
     settings: {
       react: {
@@ -13,6 +12,13 @@ export default [
       },
     },
   },
+  pluginJs.configs.recommended,
   pluginReactConfig,
+  {
+    rules: {
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+    },
+  },
   eslintConfigPrettier,
 ];
