@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { InputText } from "../atoms/Text";
 import { Button } from "../atoms/Button";
 import { MainPage, MainSection } from "../molecules/MainPagePart";
-import HeaderSection from "../organisms/HeaderPart";
+import HeaderSection from "../organisms/HeaderSection";
 import { GlobalStyle } from "../../App";
 
 const TopButton = styled(Button)`

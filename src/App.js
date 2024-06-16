@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderSection from "./components/organisms/HeaderPart";
+import HeaderSection from "./components/organisms/HeaderSection";
 import BodySection from "./components/pages/MainPage";
 import { createGlobalStyle } from "styled-components";
 
