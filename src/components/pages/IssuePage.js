@@ -1,38 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { InputText } from "../atoms/Text";
-import { Button } from "../atoms/Button";
+import { PrimaryButton, WarningButton } from "../atoms/Button";
 import { MainPage, MainSection } from "../molecules/MainPagePart";
 import HeaderSection from "../organisms/HeaderSection";
-import { GlobalStyle } from "../../App";
+import { updateIssueInfo } from "../../features/IssueTableSlice";
+import { addIssue } from "../../features/IssueTableSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-const TopButton = styled(Button)`
-  padding: 4px 16px;
-  margin: 4px;
-  min-width: 100px;
-  font-size: 1rem;
-  border-radius: 6px;
-`;
-
-const PrimaryButton = styled(TopButton)`
-  color: white;
-  background: rgb(66, 195, 96);
-  border-bottom: 2px solid rgb(40, 167, 69);
-  &:hover {
-    background: rgb(40, 167, 69);
-    border-bottom: 2px solid rgb(32, 132, 55);
-  }
-`;
-
-const WarningButton = styled(TopButton)`
-  color: white;
-  background: rgb(215, 58, 73);
-  border-bottom: 2px solid rgb(175, 28, 42);
-  &:hover {
-    background: rgb(175, 28, 42);
-    border-bottom: 2px solid rgb(103, 16, 25);
-  }
-`;
 const TabCard = styled.li`
   li {
     padding: 0px;
@@ -128,30 +103,6 @@ const issueTableList = {
   updated: "更新日付",
 };
 
-const issueInfo = {
-  Issue1: {
-    text: "A bug in Top Page",
-    status: "Open",
-    author: "",
-    created: "06-02-2024",
-    updated: "06-02-2024",
-  },
-  Issue2: {
-    text: "A problem of performance in Top Page",
-    status: "Open",
-    author: "",
-    created: "06-02-2024",
-    updated: "06-02-2024",
-  },
-  Issue3: {
-    text: "fix layout",
-    status: "Close",
-    author: "",
-    created: "06-02-2024",
-    updated: "06-02-2024",
-  },
-};
-
 export function TabPage({ name, isActive, tabClick }) {
   if (name === tabPages.issue) {
     return (
@@ -185,6 +136,8 @@ function IssueListRow(props) {
 
 let isIssuePage = true;
 export function DisplayIssueTable({ isIssuePage }) {
+  const issueInfo = useSelector(updateIssueInfo);
+  console.log(issueInfo);
   if (isIssuePage) {
     return (
       <TableScroll>
@@ -195,7 +148,7 @@ export function DisplayIssueTable({ isIssuePage }) {
                 <input type="checkbox"></input>
               </th>
               {Object.values(issueTableList).map((value) => {
-                return <th>{value}</th>;
+                return <th key={value}>{value}</th>;
               })}
             </tr>
             {Object.keys(issueInfo).map((key) => (
@@ -217,7 +170,7 @@ export function DisplayIssueHeader({ isIssueHeader }) {
           <InputWindow type="input" placeholder="issue名で検索"></InputWindow>
         </InputForm>
         <MainHeaderBtn>
-          <PrimaryButton> New </PrimaryButton>
+          <PrimaryButton>New</PrimaryButton>
           <WarningButton>Delete </WarningButton>
         </MainHeaderBtn>
       </MainHeader>
@@ -228,7 +181,6 @@ export function DisplayIssueHeader({ isIssueHeader }) {
 export default function IssuePage() {
   return (
     <>
-      <GlobalStyle />
       <HeaderSection />
       <MainPage>
         <MainSection>
