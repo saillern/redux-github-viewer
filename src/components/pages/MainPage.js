@@ -1,5 +1,6 @@
 import React from "react";
-import { DisplayIssueHeader, DisplayIssueTable, TabPage } from "./IssuePage";
+import { DisplayIssueHeader, TabPage } from "./IssuePage";
+import IssueTableSection from "../organisms/IssueTableSection";
 import { MainPage, MainTab, MainSection } from "../molecules/MainPagePart";
 
 let isIssuePage = true;
@@ -26,7 +27,7 @@ export default function BodySection() {
         </MainTab>
         <MainSection>
           <DisplayIssueHeader isIssueHeader={isIssuePage} />
-          <DisplayIssueTable isIssuePage={isIssuePage} />
+          <IssueTableSection isIssuePage={isIssuePage} />
         </MainSection>
       </MainPage>
     </>
