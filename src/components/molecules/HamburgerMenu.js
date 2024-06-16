@@ -26,16 +26,13 @@ const MenuBarText = styled.a`
 `;
 
 export function OpenHamburgerMenu({ isOpen }) {
-  if (isOpen) {
-    return (
-      <MenuBarList>
-        <MenuBarText href={`/`}>Top</MenuBarText>
-        <MenuBarText>You Profile</MenuBarText>
-        <MenuBarText href={`/issue`}>Issue</MenuBarText>
-        <MenuBarText href={`/pull-request`}>Pull Request</MenuBarText>
-      </MenuBarList>
-    );
-  } else {
-    return;
-  }
+  if (!isOpen) return;
+  return (
+    <MenuBarList>
+      <MenuBarText href={`/`}>Top</MenuBarText>
+      <MenuBarText>You Profile</MenuBarText>
+      <MenuBarText href={`/issue`}>Issue</MenuBarText>
+      <MenuBarText href={`/pull-request`}>Pull Request</MenuBarText>
+    </MenuBarList>
+  );
 }
