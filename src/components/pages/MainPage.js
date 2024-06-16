@@ -14,12 +14,12 @@ export default function BodySection() {
       <MainPage>
         <MainTab>
           <TabPage
-            name={"Issue"}
+            children={"Issue"}
             isActive={isIssuePage}
             tabClick={issuePageClick}
           />
           <TabPage
-            name={"Pull Request"}
+            children={"Pull Request"}
             isActive={isPullRequestPage}
             tabClick={pullRequestPageClick}
           />

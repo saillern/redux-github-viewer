@@ -103,20 +103,12 @@ const issueTableList = {
   updated: "更新日付",
 };
 
-export function TabPage({ name, isActive, tabClick }) {
-  if (name === tabPages.issue) {
-    return (
-      <TabCard $isActive={isActive} onClick={tabClick}>
-        <TabCardText>{tabPages.issue}</TabCardText>
-      </TabCard>
-    );
-  } else if (name === tabPages.pullRequest) {
-    return (
-      <TabCard $isActive={isActive} onClick={tabClick}>
-        <TabCardText>{tabPages.pullRequest}</TabCardText>
-      </TabCard>
-    );
-  }
+export function TabPage({ children, isActive, tabClick }) {
+  return (
+    <TabCard $isActive={isActive} onClick={tabClick}>
+      <TabCardText>{children}</TabCardText>
+    </TabCard>
+  );
 }
 
 function IssueListRow(props) {
