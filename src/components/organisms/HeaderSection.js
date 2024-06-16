@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { HeaderTitle, HeaderListText } from "../molecules/Header";
+import { HeaderTitle, HeaderListText } from "../molecules/HeaderPart";
 import { FaBars } from "react-icons/fa";
-import { IconContext } from "react-icons";
 import { OpenHamburgerMenu } from "../molecules/HamburgerMenu";
 import { handleMenuBar, openMenuState } from "../../features/Reducer";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,12 +57,10 @@ export default function HeaderSection() {
         <HeaderList href={`/pull-request`}>Pull Request</HeaderList>
       </HeaderListFormat>
       <MenuLink>
-        <IconContext.Provider value={{ color: "white", size: "1.2rem" }}>
-          <Menubar onClick={() => dispatch(handleMenuBar())}>
-            <FaBars />
-          </Menubar>
-          <OpenHamburgerMenu isOpen={openMenu} />
-        </IconContext.Provider>
+        <Menubar onClick={() => dispatch(handleMenuBar())}>
+          <FaBars />
+        </Menubar>
+        <OpenHamburgerMenu isOpen={openMenu} />
       </MenuLink>
     </HeaderFormat>
   );

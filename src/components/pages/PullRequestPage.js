@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import HeaderSection from "../organisms/HeaderSection";
-import { GlobalStyle } from "../../App";
 
 const PullRequestSection = styled.div`
   padding: 16px;
@@ -17,7 +16,6 @@ const PullRequestSectionTitle = styled.h1`
 export default function PullRequestPage() {
   return (
     <>
-      <GlobalStyle />
       <HeaderSection />
       <PullRequestSection>
         <PullRequestSectionTitle>PullRequest</PullRequestSectionTitle>
