@@ -7,35 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import IssuePage from "./components/pages/IssuePage";
 import PullRequestPage from "./components/pages/PullRequestPage";
 import { IconContext } from "react-icons";
-import { createGlobalStyle } from "styled-components";
-
-export const GlobalStyle = createGlobalStyle`
-  body{
-    margin: 0;  
-  }
-  html{
-    font-family: Lato, "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;
-    line-height: 1.5;
-    font-size: 14px;
-    padding: 0px;
-    margin: 0;
-  }
-  a{
-    color: rgb(3,102,214);
-    text-decration:none;
-  }
-
-  *,*:before,*:after {
-    box-sizing: border-box;
-  }
-  li{
-    list-style-type:none;
-  }
-  ul{
-    padding:0px;
-    margin:0px;
-  }
-`;
+import { GlobalStyle } from "./components/pages/Layout";
 
 const router = createBrowserRouter([
   {

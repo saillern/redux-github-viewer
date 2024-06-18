@@ -52,6 +52,7 @@ const InputForm = styled.div`
 const MainHeaderBtn = styled.div`
   display: flex;
 `;
+
 export const tabPages = {
   issue: "Issue",
   pullRequest: "Pull Request",
@@ -65,7 +66,7 @@ export function TabPage({ children, isActive, tabClick }) {
   );
 }
 
-export function DisplayIssueHeader({ isIssueHeader }) {
+export function IssueHeaderSection({ isIssueHeader }) {
   if (isIssueHeader) {
     return (
       <MainHeader>
@@ -89,7 +90,7 @@ export default function IssuePage() {
       <HeaderSection />
       <MainPage>
         <MainSection>
-          <DisplayIssueHeader isIssueHeader={isIssuePage} />
+          <IssueHeaderSection isIssueHeader={isIssuePage} />
           <IssueTableSection isIssuePage={isIssuePage} />
         </MainSection>
       </MainPage>
