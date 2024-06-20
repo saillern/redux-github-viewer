@@ -52,6 +52,7 @@ export default function AddIssueModal() {
     const year = String(today.getFullYear());
     const created = month + "-" + day + "-" + year;
     const x = {
+      id: 0,
       title: issueTitle,
       description: issueText,
       status: "Close",

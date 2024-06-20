@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import HeaderSection from "../organisms/HeaderSection";
 
 const PullRequestSection = styled.div`
   padding: 16px;
@@ -13,10 +12,10 @@ const PullRequestSectionTitle = styled.h1`
   margin: 0px;
 `;
 
-export default function PullRequestPage() {
+export default function PullRequestPage({ isOpen }) {
+  if (!isOpen) return;
   return (
     <>
-      <HeaderSection />
       <PullRequestSection>
         <PullRequestSectionTitle>PullRequest</PullRequestSectionTitle>
       </PullRequestSection>

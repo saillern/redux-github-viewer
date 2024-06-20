@@ -12,41 +12,45 @@ const issueTableFormat = {
 };
 
 function IssueTableRow(props) {
+  const title = props.issueParam.title;
+  const status = props.issueParam.status ? "Open" : "Close";
+  const author = props.issueParam.author;
+  const created = props.issueParam.created;
   return (
     <tr>
       <td>
         <input type="checkbox"></input>
       </td>
-      <td className="outline">{props.issueParam.text}</td>
-      <td>{props.issueParam.status}</td>
-      <td>{props.issueParam.author}</td>
-      <td>{props.issueParam.created}</td>
-      <td>{props.issueParam.updated}</td>
+      <td className="outline">{title}</td>
+      <td>{status}</td>
+      <td>{author}</td>
+      <td>{created}</td>
+      <td>{created}</td>
     </tr>
   );
 }
 
 export default function IssueTableSection({ isIssuePage }) {
   const issueInfo = useSelector(updateIssueInfo);
-  if (isIssuePage) {
-    return (
-      <TableScroll>
-        <IssueTableStyle>
-          <thead>
-            <tr>
-              <th>
-                <input type="checkbox"></input>
-              </th>
-              {Object.values(issueTableFormat).map((value) => {
-                return <th key={value}>{value}</th>;
-              })}
-            </tr>
-            {Object.keys(issueInfo).map((key) => (
-              <IssueTableRow key={key} issueParam={issueInfo[key]} />
-            ))}
-          </thead>
-        </IssueTableStyle>
-      </TableScroll>
-    );
-  }
+  if (!isIssuePage) return;
+
+  return (
+    <TableScroll>
+      <IssueTableStyle>
+        <thead>
+          <tr>
+            <th>
+              <input type="checkbox"></input>
+            </th>
+            {Object.values(issueTableFormat).map((value) => {
+              return <th key={value}>{value}</th>;
+            })}
+          </tr>
+          {Object.keys(issueInfo).map((key) => (
+            <IssueTableRow key={key} issueParam={issueInfo[key]} />
+          ))}
+        </thead>
+      </IssueTableStyle>
+    </TableScroll>
+  );
 }

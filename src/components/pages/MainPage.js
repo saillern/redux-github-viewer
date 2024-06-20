@@ -2,13 +2,18 @@ import React from "react";
 import { IssueHeaderSection, TabPage } from "./IssuePage";
 import IssueTableSection from "../organisms/IssueTableSection";
 import { MainPage, MainTab, MainSection } from "../molecules/MainPagePart";
-
-let isIssuePage = true;
-let isPullRequestPage = false;
+import PullRequestPage from "./PullRequestPage";
+import { useState } from "react";
 
 export default function BodySection() {
-  function issuePageClick() {}
-  function pullRequestPageClick() {}
+  const [isIssuePage, setIsIssuePage] = useState(true);
+
+  function issuePageClick() {
+    setIsIssuePage(true);
+  }
+  function pullRequestPageClick() {
+    setIsIssuePage(false);
+  }
 
   return (
     <>
@@ -21,13 +26,14 @@ export default function BodySection() {
           />
           <TabPage
             children={"Pull Request"}
-            isActive={isPullRequestPage}
+            isActive={!isIssuePage}
             tabClick={pullRequestPageClick}
           />
         </MainTab>
         <MainSection>
           <IssueHeaderSection isIssueHeader={isIssuePage} />
           <IssueTableSection isIssuePage={isIssuePage} />
+          <PullRequestPage isOpen={!isIssuePage} />
         </MainSection>
       </MainPage>
     </>
