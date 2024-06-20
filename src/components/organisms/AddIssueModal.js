@@ -4,6 +4,8 @@ import { SuccessButton, LinkButton } from "../atoms/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, modalState } from "../../features/OpenModal";
 import { InputWindow, InputForm } from "../atoms/Text";
+import { addIssue } from "../../features/IssueTableSlice";
+import { useRef } from "react";
 
 const AddIssueSection = styled.div`
   max-width: 598px;
@@ -28,7 +30,7 @@ const AddIssueBlock = styled.div`
   padding: 16px;
   min-height: 100px;
 `;
-const AddIssueWindowFooter = styled.div`
+const AddIssueModalFooter = styled.div`
   display: flex;
   -webkit-box-align: center;
   align-items: center;
@@ -37,8 +39,29 @@ const AddIssueWindowFooter = styled.div`
 `;
 
 export default function AddIssueModal() {
+  const inputTitleRef = useRef(null);
+  const inputTextRef = useRef(null);
   const isOpen = useSelector(modalState);
   const dispatch = useDispatch();
+  function AddIssue() {
+    const issueTitle = inputTitleRef.current.value;
+    const issueText = inputTextRef.current.value;
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    const year = String(today.getFullYear());
+    const created = month + "-" + day + "-" + year;
+    const x = {
+      title: issueTitle,
+      description: issueText,
+      status: "Close",
+      author: "",
+      created: created,
+      updated: created,
+    };
+
+    dispatch(addIssue(x));
+  }
   return (
     <div>
       <ReactModal isOpen={isOpen}>
@@ -50,6 +73,8 @@ export default function AddIssueModal() {
               <InputWindow
                 type="input"
                 placeholder="タイトルを入力してください"
+                id="TitleForm"
+                ref={inputTitleRef}
               ></InputWindow>
             </AddIssueInputSection>
             <AddIssueInputSection>
@@ -57,16 +82,18 @@ export default function AddIssueModal() {
               <InputForm
                 type="input"
                 placeholder="説明を入力してください"
+                id="TextForm"
+                ref={inputTextRef}
               ></InputForm>
             </AddIssueInputSection>
           </AddIssueBody>
           <AddIssueBlock />
-          <AddIssueWindowFooter>
-            <SuccessButton>作成</SuccessButton>
+          <AddIssueModalFooter>
+            <SuccessButton onClick={() => AddIssue()}>作成</SuccessButton>
             <LinkButton onClick={() => dispatch(closeModal())}>
               閉じる
             </LinkButton>
-          </AddIssueWindowFooter>
+          </AddIssueModalFooter>
         </AddIssueSection>
       </ReactModal>
     </div>
