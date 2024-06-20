@@ -18,3 +18,22 @@ export const InputText = styled.input`
   font-size: 1rem;
   width: 100%;
 `;
+
+export const InputWindow = styled(InputText)`
+  border-radius: 6px;
+  border: 1px solid rgb(225, 228, 232);
+`;
+
+export const InputArea = styled.textarea`
+  padding: 8px;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1rem;
+  width: 100%;
+  min-height: 150px;
+`;
+export const InputForm = styled(InputArea)`
+  border-radius: 6px;
+  border: 1px solid rgb(225, 228, 232);
+`;
