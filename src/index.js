@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "pull-request",
-    element: <PullRequestPage />,
+    element: <PullRequestPage isOpen={true} />,
   },
 ]);
 
