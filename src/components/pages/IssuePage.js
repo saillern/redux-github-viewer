@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { InputText } from "../atoms/Text";
+import { InputWindow } from "../atoms/Text";
 import { PrimaryButton, WarningButton } from "../atoms/Button";
 import { MainPage, MainSection } from "../molecules/MainPagePart";
 import HeaderSection from "../organisms/HeaderSection";
 import IssueTableSection from "../organisms/IssueTableSection";
+import AddIssueModal from "../organisms/AddIssueModal";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../features/OpenModal";
 
 const TabCard = styled.li`
   li {
@@ -38,11 +41,6 @@ const MainHeader = styled.div`
   align-items: center;
 `;
 
-const InputWindow = styled(InputText)`
-  border-radius: 6px;
-  border: 1px solid rgb(225, 228, 232);
-`;
-
 const InputForm = styled.div`
   padding: 8px 16px;
   display: flex;
@@ -67,6 +65,7 @@ export function TabPage({ children, isActive, tabClick }) {
 }
 
 export function IssueHeaderSection({ isIssueHeader }) {
+  const dispatch = useDispatch();
   if (isIssueHeader) {
     return (
       <MainHeader>
@@ -75,8 +74,11 @@ export function IssueHeaderSection({ isIssueHeader }) {
           <InputWindow type="input" placeholder="issue名で検索"></InputWindow>
         </InputForm>
         <MainHeaderBtn>
-          <PrimaryButton>New</PrimaryButton>
+          <PrimaryButton onClick={() => dispatch(openModal())}>
+            New
+          </PrimaryButton>
           <WarningButton>Delete </WarningButton>
+          <AddIssueModal />
         </MainHeaderBtn>
       </MainHeader>
     );

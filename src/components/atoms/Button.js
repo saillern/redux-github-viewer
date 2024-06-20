@@ -7,7 +7,7 @@ export const Button = styled.a`
   text-align: center;
 `;
 
-const MainButton = styled(Button)`
+export const MainButton = styled(Button)`
   padding: 4px 16px;
   margin: 4px;
   min-width: 100px;
@@ -33,4 +33,12 @@ export const WarningButton = styled(MainButton)`
     background: rgb(175, 28, 42);
     border-bottom: 2px solid rgb(103, 16, 25);
   }
+`;
+
+export const SuccessButton = styled(PrimaryButton)`
+  width: auto;
+`;
+
+export const LinkButton = styled(MainButton)`
+  width: auto;
 `;

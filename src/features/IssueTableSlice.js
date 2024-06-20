@@ -2,21 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const issueInfo = [
   {
-    text: "A bug in Top Page",
+    title: "A bug in Top Page",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     status: "Open",
     author: "",
     created: "06-02-2024",
     updated: "06-02-2024",
   },
   {
-    text: "A problem of performance in Top Page",
+    title: "A problem of performance in Top Page",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     status: "Open",
     author: "",
     created: "06-02-2024",
     updated: "06-02-2024",
   },
   {
-    text: "fix layout",
+    title: "fix layout",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     status: "Close",
     author: "",
     created: "06-02-2024",
