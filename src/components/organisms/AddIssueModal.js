@@ -4,7 +4,7 @@ import { SuccessButton, LinkButton } from "../atoms/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, modalState } from "../../features/OpenModal";
 import { InputWindow, InputForm } from "../atoms/Text";
-import { addIssue } from "../../features/IssueTableSlice";
+import { addIssue, updateIssueInfo } from "../../features/IssueTableSlice";
 import { useRef } from "react";
 
 const AddIssueSection = styled.div`
@@ -43,7 +43,8 @@ export default function AddIssueModal() {
   const inputTextRef = useRef(null);
   const isOpen = useSelector(modalState);
   const dispatch = useDispatch();
-  function AddIssue() {
+  const issues = useSelector(updateIssueInfo);
+  function makeIssue() {
     const issueTitle = inputTitleRef.current.value;
     const issueText = inputTextRef.current.value;
     const today = new Date();
@@ -51,17 +52,21 @@ export default function AddIssueModal() {
     const day = String(today.getDate()).padStart(2, "0");
     const year = String(today.getFullYear());
     const created = month + "-" + day + "-" + year;
-    const x = {
-      id: 0,
-      title: issueTitle,
-      description: issueText,
-      status: "Close",
-      author: "",
-      created: created,
-      updated: created,
+    const num = issues.index + 1;
+    const newIssue = {
+      index: num,
+      data: {
+        num: {
+          id: num - 1,
+          title: issueTitle,
+          description: issueText,
+          status: "Close",
+          author: "",
+          createBy: created,
+        },
+      },
     };
-
-    dispatch(addIssue(x));
+    dispatch(addIssue(newIssue));
   }
   return (
     <div>
@@ -90,7 +95,7 @@ export default function AddIssueModal() {
           </AddIssueBody>
           <AddIssueBlock />
           <AddIssueModalFooter>
-            <SuccessButton onClick={() => AddIssue()}>作成</SuccessButton>
+            <SuccessButton onClick={() => makeIssue()}>作成</SuccessButton>
             <LinkButton onClick={() => dispatch(closeModal())}>
               閉じる
             </LinkButton>

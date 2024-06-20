@@ -4,7 +4,7 @@ import { updateIssueInfo } from "../../features/IssueTableSlice";
 import { useSelector } from "react-redux";
 
 const issueTableFormat = {
-  text: "",
+  title: "",
   status: "ステータス",
   author: "作成者",
   created: "作成日付",
@@ -12,10 +12,12 @@ const issueTableFormat = {
 };
 
 function IssueTableRow(props) {
+  console.log(props);
   const title = props.issueParam.title;
   const status = props.issueParam.status ? "Open" : "Close";
   const author = props.issueParam.author;
-  const created = props.issueParam.created;
+  const created = props.issueParam.createBy;
+  const updated = props.issueParam.createBy;
   return (
     <tr>
       <td>
@@ -25,7 +27,7 @@ function IssueTableRow(props) {
       <td>{status}</td>
       <td>{author}</td>
       <td>{created}</td>
-      <td>{created}</td>
+      <td>{updated}</td>
     </tr>
   );
 }
@@ -46,8 +48,8 @@ export default function IssueTableSection({ isIssuePage }) {
               return <th key={value}>{value}</th>;
             })}
           </tr>
-          {Object.keys(issueInfo).map((key) => (
-            <IssueTableRow key={key} issueParam={issueInfo[key]} />
+          {Object.keys(issueInfo.data).map((key) => (
+            <IssueTableRow key={key} issueParam={issueInfo.data[key]} />
           ))}
         </thead>
       </IssueTableStyle>

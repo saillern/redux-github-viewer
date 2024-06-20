@@ -6,7 +6,7 @@ import { modalAction } from "./OpenModal";
 export const store = configureStore({
   reducer: {
     menuState: activeMenuBar.reducer,
-    issues: issueListSlice.reducer,
+    issue: issueListSlice.reducer,
     modalState: modalAction.reducer,
   },
 });
