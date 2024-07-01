@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { InputWindow } from "../atoms/Text";
-import { PrimaryButton, WarningButton } from "../atoms/Button";
+import { PrimaryButton } from "../atoms/Button";
 import { MainPage, MainSection } from "../molecules/MainPagePart";
 import HeaderSection from "../organisms/HeaderSection";
 import IssueTableSection from "../organisms/IssueTableSection";
@@ -74,10 +74,10 @@ export function IssueHeaderSection({ isIssueHeader }) {
           <InputWindow type="input" placeholder="issue名で検索"></InputWindow>
         </InputForm>
         <MainHeaderBtn>
-          <PrimaryButton onClick={() => dispatch(openModal())}>
+          <PrimaryButton isPrimary={true} onClick={() => dispatch(openModal())}>
             New
           </PrimaryButton>
-          <WarningButton>Delete </WarningButton>
+          <PrimaryButton isPrimary={false}>Delete </PrimaryButton>
           <AddIssueModal />
         </MainHeaderBtn>
       </MainHeader>

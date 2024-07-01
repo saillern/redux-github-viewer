@@ -1,44 +1,28 @@
 import styled from "styled-components";
 
-export const Button = styled.a`
+const Button = styled.a`
   cursor: pointer;
   display: block;
   width: 100%;
   text-align: center;
-`;
-
-export const MainButton = styled(Button)`
   padding: 4px 16px;
   margin: 4px;
   min-width: 100px;
   font-size: 1rem;
   border-radius: 6px;
-`;
-
-export const PrimaryButton = styled(MainButton)`
-  color: white;
-  background: rgb(66, 195, 96);
-  border-bottom: 2px solid rgb(40, 167, 69);
-  &:hover {
-    background: rgb(40, 167, 69);
-    border-bottom: 2px solid rgb(32, 132, 55);
-  }
-`;
-
-export const WarningButton = styled(MainButton)`
-  color: white;
-  background: rgb(215, 58, 73);
-  border-bottom: 2px solid rgb(175, 28, 42);
-  &:hover {
-    background: rgb(175, 28, 42);
-    border-bottom: 2px solid rgb(103, 16, 25);
-  }
-`;
-
-export const SuccessButton = styled(PrimaryButton)`
   width: auto;
 `;
 
-export const LinkButton = styled(MainButton)`
-  width: auto;
+export const PrimaryButton = styled(Button)`
+  color: white;
+  background: ${(props) =>
+    props.isPrimary ? "rgb(66, 195, 96)" : "rgb(215, 58, 73)"};
+  border-bottom: 2px solid
+    ${(props) => (props.isPrimary ? "rgb(40, 167, 69)" : " rgb(175, 28, 42)")};
+  &:hover {
+    background: ${(props) =>
+      props.isPrimary ? "rgb(40, 167, 69)" : "rgb(175, 28, 42)"};
+    border-bottom: 2px solid
+      ${(props) => (props.isPrimary ? "rgb(32, 132, 55)" : "rgb(103, 16, 25)")};
+  }
 `;

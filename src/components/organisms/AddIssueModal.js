@@ -1,6 +1,6 @@
 import ReactModal from "react-modal";
 import styled from "styled-components";
-import { SuccessButton, LinkButton } from "../atoms/Button";
+import { PrimaryButton } from "../atoms/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, modalState } from "../../features/OpenModal";
 import { InputWindow, InputForm } from "../atoms/Text";
@@ -95,10 +95,15 @@ export default function AddIssueModal() {
           </AddIssueBody>
           <AddIssueBlock />
           <AddIssueModalFooter>
-            <SuccessButton onClick={() => makeIssue()}>作成</SuccessButton>
-            <LinkButton onClick={() => dispatch(closeModal())}>
+            <PrimaryButton isPrimary={true} onClick={() => makeIssue()}>
+              作成
+            </PrimaryButton>
+            <PrimaryButton
+              isPrimary={true}
+              onClick={() => dispatch(closeModal())}
+            >
               閉じる
-            </LinkButton>
+            </PrimaryButton>
           </AddIssueModalFooter>
         </AddIssueSection>
       </ReactModal>
