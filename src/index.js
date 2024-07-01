@@ -8,6 +8,7 @@ import IssuePage from "./components/pages/IssuePage";
 import PullRequestPage from "./components/pages/PullRequestPage";
 import { IconContext } from "react-icons";
 import { GlobalStyle } from "./components/pages/Layout";
+import HeaderSection from "./components/organisms/HeaderSection";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,12 @@ const router = createBrowserRouter([
   },
   {
     path: "pull-request",
-    element: <PullRequestPage isOpen={true} />,
+    element: (
+      <>
+        <HeaderSection />
+        <PullRequestPage isOpen={true} />
+      </>
+    ),
   },
 ]);
 

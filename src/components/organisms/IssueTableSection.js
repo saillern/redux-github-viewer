@@ -1,7 +1,8 @@
 import React from "react";
 import { TableScroll, IssueTableStyle } from "../molecules/IssueTablePart";
 import { updateIssueInfo } from "../../features/IssueTableSlice";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { openModal } from "../../features/OpenModal";
 
 const issueTableFormat = {
   title: "",
@@ -12,14 +13,14 @@ const issueTableFormat = {
 };
 
 function IssueTableRow(props) {
-  console.log(props);
   const title = props.issueParam.title;
   const status = props.issueParam.status ? "Open" : "Close";
   const author = props.issueParam.author;
   const created = props.issueParam.createBy;
   const updated = props.issueParam.createBy;
+  const dispatch = useDispatch();
   return (
-    <tr>
+    <tr onClick={() => dispatch(openModal())}>
       <td>
         <input type="checkbox"></input>
       </td>
