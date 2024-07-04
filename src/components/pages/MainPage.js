@@ -1,6 +1,6 @@
 import React from "react";
 import { IssueHeaderSection, TabPage } from "./IssuePage";
-import IssueTableSection from "../organisms/IssueTableSection";
+import IssueTableSection from "../organisms/IssueTable";
 import { MainPage, MainTab, MainSection } from "../molecules/MainPagePart";
 import PullRequestPage from "./PullRequestPage";
 import { useState } from "react";

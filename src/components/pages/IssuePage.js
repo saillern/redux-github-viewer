@@ -4,15 +4,13 @@ import { InputWindow } from "../atoms/Text";
 import { PrimaryButton } from "../atoms/Button";
 import { MainPage, MainSection } from "../molecules/MainPagePart";
 import HeaderSection from "../organisms/HeaderSection";
-import IssueTableSection from "../organisms/IssueTableSection";
+import IssueTableSection from "../organisms/IssueTable";
 import AddIssueModal from "../organisms/AddIssueModal";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../features/OpenModal";
 
 const TabCard = styled.li`
-  li {
-    padding: 0px;
-  }
+  padding: 0px;
   font-size: 1.2rem;
   width: 100%;
   text-align: center;
