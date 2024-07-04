@@ -10,6 +10,7 @@ import { IconContext } from "react-icons";
 import { GlobalStyle } from "./components/pages/Layout";
 import HeaderSection from "./components/organisms/HeaderSection";
 
+//Headerを共有する形で書く
 const router = createBrowserRouter([
   {
     path: "/",

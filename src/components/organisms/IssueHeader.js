@@ -18,10 +18,11 @@ const InputForm = styled.div`
   width: 100%;
 `;
 
-const MainHeaderBtn = styled.div`
+const Flex = styled.div`
   display: flex;
 `;
-export default function IssueHeaderSection({ isIssueHeader }) {
+
+export default function IssueHeader({ isIssueHeader }) {
   const dispatch = useDispatch();
   if (isIssueHeader) {
     return (
@@ -30,13 +31,13 @@ export default function IssueHeaderSection({ isIssueHeader }) {
         <InputForm>
           <InputWindow type="input" placeholder="issue名で検索"></InputWindow>
         </InputForm>
-        <MainHeaderBtn>
+        <Flex>
           <PrimaryButton isPrimary={true} onClick={() => dispatch(openModal())}>
             New
           </PrimaryButton>
           <PrimaryButton isPrimary={false}>Delete </PrimaryButton>
           <AddIssueModal />
-        </MainHeaderBtn>
+        </Flex>
       </MainHeader>
     );
   }
