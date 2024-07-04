@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../features/OpenModal";
+import { openModal } from "../../features/ModalSlice";
 
 const TableItem = styled.td`
   padding: 8px;

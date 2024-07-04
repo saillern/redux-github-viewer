@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const modalAction = createSlice({
+export const modalSlice = createSlice({
   name: "modal",
   initialState: {
     show: false,
@@ -15,5 +15,5 @@ export const modalAction = createSlice({
   },
 });
 
-export const { openModal, closeModal } = modalAction.actions;
+export const { openModal, closeModal } = modalSlice.actions;
 export const modalState = (state) => state.modalState.show;

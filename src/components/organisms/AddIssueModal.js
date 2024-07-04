@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { PrimaryButton } from "../atoms/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, modalState } from "../../features/OpenModal";
+import { closeModal, modalState } from "../../features/ModalSlice";
 import { InputWindow, InputForm } from "../atoms/Text";
 import { addIssue } from "../../features/IssueSlice";
 

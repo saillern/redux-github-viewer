@@ -4,7 +4,7 @@ import { PrimaryButton } from "../atoms/Button";
 
 import AddIssueModal from "../organisms/AddIssueModal";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../features/OpenModal";
+import { openModal } from "../../features/ModalSlice";
 
 const MainHeader = styled.div`
   display: flex;

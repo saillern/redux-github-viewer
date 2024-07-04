@@ -23,7 +23,7 @@ const TableRow = styled.tr`
   }
 `;
 
-const issueTableFormat = {
+const issueStatus = {
   title: "",
   status: "ステータス",
   author: "作成者",
@@ -43,7 +43,7 @@ export default function IssueTable({ isIssuePage }) {
             <TableHeaderItem>
               <input type="checkbox"></input>
             </TableHeaderItem>
-            {Object.values(issueTableFormat).map((value) => {
+            {Object.values(issueStatus).map((value) => {
               return <th key={value}>{value}</th>;
             })}
           </TableRow>
