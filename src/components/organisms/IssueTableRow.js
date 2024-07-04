@@ -11,7 +11,7 @@ const TableItem = styled.td`
 
 export default function IssueTableRow(props) {
   const title = props.issueParam.title;
-  const status = props.issueParam.status ? "Open" : "Close";
+  const status = props.issueParam.status;
   const author = props.issueParam.author;
   const created = props.issueParam.createBy;
   const updated = props.issueParam.createBy;

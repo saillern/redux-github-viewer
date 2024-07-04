@@ -1,4 +1,4 @@
-import { MainPage, MainSection } from "../molecules/MainPagePart";
+import { MainBody, MainSection } from "../molecules/MainPagePart";
 import HeaderSection from "../organisms/HeaderSection";
 import IssueTableSection from "../organisms/IssueTable";
 import IssueHeaderSection from "../organisms/IssueHeader";
@@ -8,12 +8,12 @@ export default function IssuePage() {
   return (
     <>
       <HeaderSection />
-      <MainPage>
+      <MainBody>
         <MainSection>
           <IssueHeaderSection isIssueHeader={isIssuePage} />
           <IssueTableSection isIssuePage={isIssuePage} />
         </MainSection>
-      </MainPage>
+      </MainBody>
     </>
   );
 }

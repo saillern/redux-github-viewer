@@ -1,12 +1,11 @@
-import React from "react";
 import IssueHeaderSection from "../organisms/IssueHeader";
 import { TabSection } from "../organisms/TabSection";
 import IssueTableSection from "../organisms/IssueTable";
-import { MainPage, MainTab, MainSection } from "../molecules/MainPagePart";
+import { MainBody, MainTab, MainSection } from "../molecules/MainPagePart";
 import PullRequestPage from "./PullRequestPage";
 import { useState } from "react";
 
-export default function BodySection() {
+export default function MainPage() {
   const [isIssuePage, setIsIssuePage] = useState(true);
 
   function issuePageClick() {
@@ -15,10 +14,9 @@ export default function BodySection() {
   function pullRequestPageClick() {
     setIsIssuePage(false);
   }
-
   return (
     <>
-      <MainPage>
+      <MainBody>
         <MainTab>
           <TabSection
             //修正中 Childrenについて調べる
@@ -38,7 +36,7 @@ export default function BodySection() {
           <IssueTableSection isIssuePage={isIssuePage} />
           <PullRequestPage isOpen={!isIssuePage} />
         </MainSection>
-      </MainPage>
+      </MainBody>
     </>
   );
 }

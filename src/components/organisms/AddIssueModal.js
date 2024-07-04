@@ -1,11 +1,11 @@
 import ReactModal from "react-modal";
 import styled from "styled-components";
+import { useState } from "react";
 import { PrimaryButton } from "../atoms/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, modalState } from "../../features/OpenModal";
 import { InputWindow, InputForm } from "../atoms/Text";
-import { addIssue, Issue } from "../../features/IssueSlice";
-import { useRef } from "react";
+import { addIssue } from "../../features/IssueSlice";
 
 const MainSection = styled.div`
   max-width: 598px;
@@ -48,71 +48,63 @@ function getDate() {
 }
 
 export default function AddIssueModal() {
-  const inputTitleRef = useRef(null);
-  const inputTextRef = useRef(null);
+  const [issueTitle, setIssueTitle] = useState("");
+  const [issueText, setIssueText] = useState("");
   const isOpen = useSelector(modalState);
   const dispatch = useDispatch();
-  const issues = useSelector(Issue);
-
   function makeIssue() {
-    const issueTitle = inputTitleRef.current.value;
-    const issueText = inputTextRef.current.value;
     const created = getDate();
-    const num = issues.index + 1;
-    const newIssue = {
-      index: num,
-      data: {
-        num: {
-          id: num - 1,
-          title: issueTitle,
-          description: issueText,
-          status: "Close",
-          author: "",
-          createBy: created,
-        },
-      },
+    const issue = {
+      title: issueTitle,
+      description: issueText,
+      status: "Open",
+      author: "",
+      createBy: created,
     };
-    dispatch(addIssue(newIssue));
+    dispatch(addIssue(issue));
+    dispatch(closeModal());
+    setIssueTitle("");
+    setIssueText("");
   }
   return (
-    <div>
-      <ReactModal isOpen={isOpen}>
-        <MainSection>
-          <Header>Issueを追加</Header>
-          <Body>
-            <InputSection>
-              <FormText>タイトル</FormText>
-              <InputWindow
-                type="input"
-                placeholder="タイトルを入力してください"
-                id="TitleForm"
-                ref={inputTitleRef}
-              ></InputWindow>
-            </InputSection>
-            <InputSection>
-              <FormText>説明</FormText>
-              <InputForm
-                type="input"
-                placeholder="説明を入力してください"
-                id="TextForm"
-                ref={inputTextRef}
-              ></InputForm>
-            </InputSection>
-          </Body>
-          <Description />
-          <Footer>
-            <PrimaryButton isPrimary={true} onClick={() => makeIssue()}>
-              作成
-            </PrimaryButton>
-            <PrimaryButton
-              isPrimary={true}
-              onClick={() => dispatch(closeModal())}
-            >
-              閉じる
-            </PrimaryButton>
-          </Footer>
-        </MainSection>
-      </ReactModal>
-    </div>
+    <ReactModal isOpen={isOpen}>
+      <MainSection>
+        <Header>Issueを追加</Header>
+        <Body>
+          <InputSection>
+            <FormText>タイトル</FormText>
+            <InputWindow
+              type="input"
+              placeholder="タイトルを入力してください"
+              id="titleForm"
+              value={issueTitle}
+              onChange={(event) => setIssueTitle(event.target.value)}
+            ></InputWindow>
+          </InputSection>
+          <InputSection>
+            <FormText>説明</FormText>
+            <InputForm
+              type="input"
+              placeholder="説明を入力してください"
+              id="textForm"
+              value={issueText}
+              onChange={(event) => setIssueText(event.target.value)}
+            ></InputForm>
+          </InputSection>
+        </Body>
+        <Description />
+        <Footer>
+          <PrimaryButton isPrimary={true} onClick={() => makeIssue()}>
+            作成
+          </PrimaryButton>
+          <PrimaryButton
+            isPrimary={true}
+            onClick={() => dispatch(closeModal())}
+          >
+            閉じる
+          </PrimaryButton>
+        </Footer>
+      </MainSection>
+    </ReactModal>
   );
 }
