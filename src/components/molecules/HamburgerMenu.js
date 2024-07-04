@@ -25,7 +25,7 @@ const MenuBarText = styled.a`
   }
 `;
 
-export function OpenHamburgerMenu({ isOpen }) {
+export function HamburgerMenu({ isOpen }) {
   if (!isOpen) return;
   return (
     <MenuBarList>

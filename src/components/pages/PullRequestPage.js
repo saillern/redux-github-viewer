@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-const PullRequestSection = styled.div`
+const Body = styled.div`
   padding: 16px;
   margin-top: 128px;
 `;
 
-const PullRequestSectionTitle = styled.h1`
+const Title = styled.h1`
   text-align: center;
   font-size: 2rem;
   padding: 0px;
@@ -16,9 +16,9 @@ export default function PullRequestPage({ isOpen }) {
   if (!isOpen) return;
   return (
     <>
-      <PullRequestSection>
-        <PullRequestSectionTitle>PullRequest</PullRequestSectionTitle>
-      </PullRequestSection>
+      <Body>
+        <Title>PullRequest</Title>
+      </Body>
     </>
   );
 }

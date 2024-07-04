@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-export const MainPage = styled.div`
+//MainSectionにマージする
+export const MainBody = styled.div`
   max-width: 896px;
   margin: 0px auto;
   padding: 32px 16px;

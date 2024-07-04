@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { activeMenuBar } from "./Reducer";
-import { issueListSlice } from "./IssueTableSlice";
-import { modalAction } from "./OpenModal";
+import { issueSlice } from "./IssueSlice";
+import { modalSlice } from "./ModalSlice";
 
 export const store = configureStore({
   reducer: {
-    menuState: activeMenuBar.reducer,
-    issue: issueListSlice.reducer,
-    modalState: modalAction.reducer,
+    menuState: activeMenuBar.reducer, //(修正)ローカルステートにする
+    issue: issueSlice.reducer,
+    modalState: modalSlice.reducer,
   },
 });
