@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { IssueTableStyle } from "../molecules/IssueTableStyle";
-import { updateIssueInfo } from "../../features/IssueTableSlice";
+import { Issue } from "../../features/IssueSlice";
 import IssueTableRow from "./IssueTableRow";
 
 const TableScroll = styled.div`
@@ -32,7 +32,7 @@ const issueTableFormat = {
 };
 
 export default function IssueTable({ isIssuePage }) {
-  const issueInfo = useSelector(updateIssueInfo);
+  const issueInfo = useSelector(Issue);
   if (!isIssuePage) return;
 
   return (

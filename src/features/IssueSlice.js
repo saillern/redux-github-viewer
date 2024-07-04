@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const issueInfo = {
+const issueInit = {
   index: 3,
   data: {
     1: {
@@ -30,9 +30,9 @@ const issueInfo = {
   },
 };
 
-export const issueListSlice = createSlice({
+export const issueSlice = createSlice({
   name: "issue",
-  initialState: issueInfo,
+  initialState: issueInit,
   reducers: {
     addIssue: {
       reducer: (state, action) => {
@@ -44,6 +44,6 @@ export const issueListSlice = createSlice({
   },
 });
 
-export const { addIssue } = issueListSlice.actions;
-export const updateIssueInfo = (state) => state.issue;
-export default issueListSlice.reducer;
+export const { addIssue } = issueSlice.actions;
+export const Issue = (state) => state.issue;
+export default issueSlice.reducer;

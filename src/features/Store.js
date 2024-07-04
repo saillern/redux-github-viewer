@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { activeMenuBar } from "./Reducer";
-import { issueListSlice } from "./IssueTableSlice";
+import { issueSlice } from "./IssueSlice";
 import { modalAction } from "./OpenModal";
 
 export const store = configureStore({
   reducer: {
     menuState: activeMenuBar.reducer,
-    issue: issueListSlice.reducer,
+    issue: issueSlice.reducer,
     modalState: modalAction.reducer,
   },
 });
