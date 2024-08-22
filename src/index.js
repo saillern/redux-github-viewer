@@ -6,6 +6,7 @@ import { store } from "./features/Store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import IssuePage from "./components/pages/IssuePage";
 import PullRequestPage from "./components/pages/PullRequestPage";
+import ProfilePage from "./components/pages/ProfilePage";
 import { IconContext } from "react-icons";
 import { GlobalStyle } from "./components/pages/Layout";
 import HeaderSection from "./components/organisms/HeaderSection";
@@ -15,6 +16,16 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      //{
+      //  path: "/",
+      //  element: <App />,
+      //},
+    ],
+  },
+  {
+    path: "profile",
+    element: <ProfilePage />,
   },
   {
     path: "issue",

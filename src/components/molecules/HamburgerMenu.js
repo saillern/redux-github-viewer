@@ -30,7 +30,7 @@ export function HamburgerMenu({ isOpen }) {
   return (
     <MenuBarList>
       <MenuBarText href={`/`}>Top</MenuBarText>
-      <MenuBarText>You Profile</MenuBarText>
+      <MenuBarText href={`/profile`}>You Profile</MenuBarText>
       <MenuBarText href={`/issue`}>Issue</MenuBarText>
       <MenuBarText href={`/pull-request`}>Pull Request</MenuBarText>
     </MenuBarList>
