@@ -11,17 +11,12 @@ import { IconContext } from "react-icons";
 import { GlobalStyle } from "./components/pages/Layout";
 import HeaderSection from "./components/organisms/HeaderSection";
 
-//TODO:Headerを共有する形で書く
+//TODO:Headerを共有する形で書く 対応中
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [
-      //{
-      //  path: "/",
-      //  element: <App />,
-      //},
-    ],
+    children: [],
   },
   {
     path: "profile",
