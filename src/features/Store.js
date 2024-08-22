@@ -5,7 +5,8 @@ import { modalSlice } from "./ModalSlice";
 
 export const store = configureStore({
   reducer: {
-    menuState: activeMenuBar.reducer, //(修正)ローカルステートにする
+    //TODO:ローカルステートにする
+    menuState: activeMenuBar.reducer,
     issue: issueSlice.reducer,
     modalState: modalSlice.reducer,
   },

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-//useStateに変更するため、後で削除予定
+//TODO:useStateに変更するため、後で削除予定
 export const activeMenuBar = createSlice({
   name: "openMenuBar",
   initialState: {
