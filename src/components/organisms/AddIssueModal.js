@@ -19,10 +19,10 @@ const Body = styled.div`
   padding: 32px 0px 16px;
 `;
 
-const InputSection = styled.div`
+const Section = styled.div`
   padding: 16px;
 `;
-const FormText = styled.label`
+const SubTitle = styled.label`
   display: block;
   padding: 8px 0px;
 `;
@@ -31,6 +31,7 @@ const Description = styled.div`
   padding: 16px;
   min-height: 100px;
 `;
+
 const Footer = styled.div`
   display: flex;
   -webkit-box-align: center;
@@ -39,6 +40,15 @@ const Footer = styled.div`
   padding: 8px;
 `;
 
+const SecondaryButton = styled(PrimaryButton)`
+  color: rgb(3, 102, 214);
+  background: white;
+  border-bottom: white;
+  &:hover {
+    background: white;
+    border-bottom: white;
+  }
+`;
 export default function AddIssueModal() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -63,8 +73,8 @@ export default function AddIssueModal() {
       <MainSection>
         <Header>Issueを追加</Header>
         <Body>
-          <InputSection>
-            <FormText>タイトル</FormText>
+          <Section>
+            <SubTitle>タイトル</SubTitle>
             <InputWindow
               type="input"
               placeholder="タイトルを入力してください"
@@ -72,9 +82,9 @@ export default function AddIssueModal() {
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             ></InputWindow>
-          </InputSection>
-          <InputSection>
-            <FormText>説明</FormText>
+          </Section>
+          <Section>
+            <SubTitle>説明</SubTitle>
             <InputForm
               type="input"
               placeholder="説明を入力してください"
@@ -82,19 +92,26 @@ export default function AddIssueModal() {
               value={text}
               onChange={(event) => setText(event.target.value)}
             ></InputForm>
-          </InputSection>
+          </Section>
+          <Section>
+            <SubTitle>ステータス</SubTitle>
+            <select>
+              <option value="Open">Open</option>
+              <option value="Close">Close</option>
+            </select>
+          </Section>
         </Body>
         <Description />
         <Footer>
           <PrimaryButton isPrimary={true} onClick={() => makeIssue()}>
             作成
           </PrimaryButton>
-          <PrimaryButton
+          <SecondaryButton
             isPrimary={true}
             onClick={() => dispatch(closeModal())}
           >
             閉じる
-          </PrimaryButton>
+          </SecondaryButton>
         </Footer>
       </MainSection>
     </ReactModal>

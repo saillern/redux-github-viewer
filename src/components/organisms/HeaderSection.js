@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { LargeFont, ListFont } from "../atoms/Text";
 import { FaBars } from "react-icons/fa";
 import { HamburgerMenu } from "../molecules/HamburgerMenu";
-import { handleMenuBar, openMenuState } from "../../features/Reducer";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 const Header = styled.div`
   display: flex;
@@ -55,8 +54,10 @@ const MenuLink = styled.div`
 `;
 
 export default function HeaderSection() {
-  const dispatch = useDispatch();
-  const openMenu = useSelector(openMenuState);
+  const [isOpen, setIsOpen] = useState(false);
+  function changeMenuState() {
+    setIsOpen(!isOpen);
+  }
   return (
     <Header>
       <Title>
@@ -67,10 +68,10 @@ export default function HeaderSection() {
         <ListText href={`/pull-request`}>Pull Request</ListText>
       </List>
       <MenuLink>
-        <Menubar onClick={() => dispatch(handleMenuBar())}>
+        <Menubar onClick={() => changeMenuState()}>
           <FaBars />
         </Menubar>
-        <HamburgerMenu isOpen={openMenu} />
+        <HamburgerMenu isOpen={isOpen} />
       </MenuLink>
     </Header>
   );

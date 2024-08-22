@@ -9,7 +9,7 @@ const Body = styled.div`
   padding: 32px 16px;
 `;
 
-const MainSection = styled.div`
+const Section = styled.div`
   padding: 16px;
   margin-top: 16px;
 `;
@@ -21,10 +21,10 @@ export default function IssuePage() {
     <>
       <HeaderSection />
       <Body>
-        <MainSection>
+        <Section>
           <IssueHeader isIssueHeader={isIssuePage} />
           <IssueTableSection isIssuePage={isIssuePage} />
-        </MainSection>
+        </Section>
       </Body>
     </>
   );

@@ -50,10 +50,10 @@ const issueStatus = {
   updated: "更新日付",
 };
 
+//TODO: Checkboxの動作 全選択とソート機能を追加
 export default function IssueTable({ isIssuePage }) {
   const issueList = useSelector(issues);
   if (!isIssuePage) return;
-
   return (
     <Scroll>
       <TableStyle>
@@ -63,7 +63,7 @@ export default function IssueTable({ isIssuePage }) {
               <input type="checkbox"></input>
             </Header>
             {Object.values(issueStatus).map((value) => {
-              return <th key={value}>{value}</th>;
+              return <Header key={value}>{value}</Header>;
             })}
           </TableRow>
           {issueList.map((val, i) => (
