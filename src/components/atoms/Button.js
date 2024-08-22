@@ -13,7 +13,7 @@ const Button = styled.a`
   width: auto;
 `;
 
-//色を引数で変更できる形にする
+//TODO:色を引数で変更できる形にする
 export const PrimaryButton = styled(Button)`
   color: white;
   background: ${(props) =>

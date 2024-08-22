@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { IssueTableStyle } from "../molecules/IssueTableStyle";
 import { issues } from "../../features/IssueSlice";
 import IssueTableRow from "./IssueTableRow";
 
@@ -14,6 +13,26 @@ const Header = styled.th`
   text-align: left;
   min-width: 10rem;
   border-bottom: 1px solid rgb(225, 228, 232);
+`;
+
+const TableStyle = styled.table`
+  border: 1px solid rgb(225, 228, 232);
+  border-radius: 6px;
+  .outline {
+    width: 140rem;
+  }
+  th:first-child {
+    min-width: auto;
+  }
+  td:first-child {
+    min-width: auto;
+  }
+  tr {
+    cursor: pointer;
+    &:hover td {
+      background-color: rgb(198, 218, 230, 0.25);
+    }
+  }
 `;
 
 const TableRow = styled.tr`
@@ -37,7 +56,7 @@ export default function IssueTable({ isIssuePage }) {
 
   return (
     <Scroll>
-      <IssueTableStyle>
+      <TableStyle>
         <thead>
           <TableRow>
             <Header>
@@ -51,7 +70,7 @@ export default function IssueTable({ isIssuePage }) {
             <IssueTableRow key={i} issueParam={issueList[i]} />
           ))}
         </thead>
-      </IssueTableStyle>
+      </TableStyle>
     </Scroll>
   );
 }
