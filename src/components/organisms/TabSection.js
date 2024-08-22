@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TabCard = styled.li`
+const Card = styled.li`
   padding: 0px;
   font-size: 1.2rem;
   width: 100%;
@@ -26,8 +26,8 @@ const Text = styled.div`
 
 export function TabSection(params) {
   return (
-    <TabCard $isActive={params.isActive} onClick={params.tabClick}>
+    <Card $isActive={params.isActive} onClick={params.tabClick}>
       <Text>{params.children}</Text>
-    </TabCard>
+    </Card>
   );
 }

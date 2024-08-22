@@ -5,11 +5,11 @@ import { IssueTableStyle } from "../molecules/IssueTableStyle";
 import { issues } from "../../features/IssueSlice";
 import IssueTableRow from "./IssueTableRow";
 
-const TableScroll = styled.div`
+const Scroll = styled.div`
   overflow: scroll;
 `;
 
-const TableHeaderItem = styled.th`
+const Header = styled.th`
   padding: 8px;
   text-align: left;
   min-width: 10rem;
@@ -36,13 +36,13 @@ export default function IssueTable({ isIssuePage }) {
   if (!isIssuePage) return;
 
   return (
-    <TableScroll>
+    <Scroll>
       <IssueTableStyle>
         <thead>
           <TableRow>
-            <TableHeaderItem>
+            <Header>
               <input type="checkbox"></input>
-            </TableHeaderItem>
+            </Header>
             {Object.values(issueStatus).map((value) => {
               return <th key={value}>{value}</th>;
             })}
@@ -52,6 +52,6 @@ export default function IssueTable({ isIssuePage }) {
           ))}
         </thead>
       </IssueTableStyle>
-    </TableScroll>
+    </Scroll>
   );
 }
