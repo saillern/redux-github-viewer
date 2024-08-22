@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal, modalState } from "../../features/ModalSlice";
 import { InputWindow, InputForm } from "../atoms/Text";
 import { addIssue } from "../../features/IssueSlice";
+import { getDate } from "../../features/GetDate";
 
 const MainSection = styled.div`
   max-width: 598px;
@@ -38,33 +39,24 @@ const Footer = styled.div`
   padding: 8px;
 `;
 
-function getDate() {
-  const today = new Date();
-  const month = String(today.getMonth() + 1).padStart(2, "0");
-  const day = String(today.getDate()).padStart(2, "0");
-  const year = String(today.getFullYear());
-  const date = month + "-" + day + "-" + year;
-  return date;
-}
-
 export default function AddIssueModal() {
-  const [issueTitle, setIssueTitle] = useState("");
-  const [issueText, setIssueText] = useState("");
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
   const isOpen = useSelector(modalState);
   const dispatch = useDispatch();
   function makeIssue() {
     const created = getDate();
     const issue = {
-      title: issueTitle,
-      description: issueText,
+      title: title,
+      description: text,
       status: "Open",
       author: "",
       createBy: created,
     };
     dispatch(addIssue(issue));
     dispatch(closeModal());
-    setIssueTitle("");
-    setIssueText("");
+    setTitle("");
+    setText("");
   }
   return (
     <ReactModal isOpen={isOpen}>
@@ -77,8 +69,8 @@ export default function AddIssueModal() {
               type="input"
               placeholder="タイトルを入力してください"
               id="titleForm"
-              value={issueTitle}
-              onChange={(event) => setIssueTitle(event.target.value)}
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
             ></InputWindow>
           </InputSection>
           <InputSection>
@@ -87,8 +79,8 @@ export default function AddIssueModal() {
               type="input"
               placeholder="説明を入力してください"
               id="textForm"
-              value={issueText}
-              onChange={(event) => setIssueText(event.target.value)}
+              value={text}
+              onChange={(event) => setText(event.target.value)}
             ></InputForm>
           </InputSection>
         </Body>

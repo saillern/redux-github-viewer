@@ -8,28 +8,25 @@ import { useState } from "react";
 export default function MainPage() {
   const [isIssuePage, setIsIssuePage] = useState(true);
 
+  //TODO:一つにまとめられないか考える
+  //
   function issuePageClick() {
     setIsIssuePage(true);
   }
   function pullRequestPageClick() {
     setIsIssuePage(false);
   }
+  //
   return (
     <>
       <MainBody>
         <MainTab>
-          <TabSection
-            //修正中 Childrenについて調べる
-            children={"Issue"}
-            isActive={isIssuePage}
-            tabClick={issuePageClick}
-          />
-          <TabSection
-            //修正中 Childrenについて調べる
-            children={"Pull Request"}
-            isActive={!isIssuePage}
-            tabClick={pullRequestPageClick}
-          />
+          <TabSection isActive={isIssuePage} tabClick={issuePageClick}>
+            Issue
+          </TabSection>
+          <TabSection isActive={!isIssuePage} tabClick={pullRequestPageClick}>
+            Pull Request
+          </TabSection>
         </MainTab>
         <MainSection>
           <IssueHeaderSection isIssueHeader={isIssuePage} />

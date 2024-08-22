@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { LargeFont, ListFont } from "../atoms/Text";
 
-//HeaderSectionにマージする
+//TODO:HeaderSectionにマージする
 export const HeaderTitle = styled(LargeFont)`
   white-space: nowrap;
   &:hover {

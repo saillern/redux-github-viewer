@@ -9,12 +9,9 @@ const TableItem = styled.td`
   border-bottom: 1px solid rgb(225, 228, 232);
 `;
 
-export default function IssueTableRow(props) {
-  const title = props.issueParam.title;
-  const status = props.issueParam.status;
-  const author = props.issueParam.author;
-  const created = props.issueParam.createBy;
-  const updated = props.issueParam.createBy;
+export default function IssueTableRow({ issueParam }) {
+  const { title, status, author, createBy } = issueParam;
+  console.log(issueParam);
   const dispatch = useDispatch();
   return (
     <tr onClick={() => dispatch(openModal())}>
@@ -24,8 +21,8 @@ export default function IssueTableRow(props) {
       <TableItem className="outline">{title}</TableItem>
       <TableItem>{status}</TableItem>
       <TableItem>{author}</TableItem>
-      <TableItem>{created}</TableItem>
-      <TableItem>{updated}</TableItem>
+      <TableItem>{createBy}</TableItem>
+      <TableItem>{createBy}</TableItem>
     </tr>
   );
 }
