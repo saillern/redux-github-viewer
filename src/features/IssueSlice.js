@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getDate } from "./GetDate";
 
 const issueInit = [
   {
@@ -6,21 +7,21 @@ const issueInit = [
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     status: "Open",
     author: "",
-    createBy: "06-02-2024",
+    createBy: getDate(),
   },
   {
     title: "A problem of performance in Top Page",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     status: "Close",
     author: "",
-    createBy: "06-02-2024",
+    createBy: getDate(),
   },
   {
     title: "fix layout",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     status: "Close",
     author: "",
-    createBy: "06-02-2024",
+    createBy: getDate(),
   },
 ];
 

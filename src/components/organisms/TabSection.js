@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TabCard = styled.li`
+const Card = styled.li`
   padding: 0px;
   font-size: 1.2rem;
   width: 100%;
@@ -16,7 +16,7 @@ const TabCard = styled.li`
     !props.$isActive ? "1px solid rgb(225, 228, 232)" : "0px"};
 `;
 
-const TabCardText = styled.span`
+const Text = styled.div`
   cursor: pointer;
   color: rgb(88, 96, 105);
   padding: 16px;
@@ -24,10 +24,10 @@ const TabCardText = styled.span`
   width: 100%;
 `;
 
-export function TabSection({ children, isActive, tabClick }) {
+export function TabSection(params) {
   return (
-    <TabCard $isActive={isActive} onClick={tabClick}>
-      <TabCardText>{children}</TabCardText>
-    </TabCard>
+    <Card $isActive={params.isActive} onClick={params.tabClick}>
+      <Text>{params.children}</Text>
+    </Card>
   );
 }

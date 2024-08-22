@@ -1,19 +1,38 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { IssueTableStyle } from "../molecules/IssueTableStyle";
 import { issues } from "../../features/IssueSlice";
 import IssueTableRow from "./IssueTableRow";
 
-const TableScroll = styled.div`
+const Scroll = styled.div`
   overflow: scroll;
 `;
 
-const TableHeaderItem = styled.th`
+const Header = styled.th`
   padding: 8px;
   text-align: left;
   min-width: 10rem;
   border-bottom: 1px solid rgb(225, 228, 232);
+`;
+
+const TableStyle = styled.table`
+  border: 1px solid rgb(225, 228, 232);
+  border-radius: 6px;
+  .outline {
+    width: 140rem;
+  }
+  th:first-child {
+    min-width: auto;
+  }
+  td:first-child {
+    min-width: auto;
+  }
+  tr {
+    cursor: pointer;
+    &:hover td {
+      background-color: rgb(198, 218, 230, 0.25);
+    }
+  }
 `;
 
 const TableRow = styled.tr`
@@ -31,27 +50,27 @@ const issueStatus = {
   updated: "更新日付",
 };
 
+//TODO: Checkboxの動作 全選択とソート機能を追加
 export default function IssueTable({ isIssuePage }) {
   const issueList = useSelector(issues);
   if (!isIssuePage) return;
-
   return (
-    <TableScroll>
-      <IssueTableStyle>
+    <Scroll>
+      <TableStyle>
         <thead>
           <TableRow>
-            <TableHeaderItem>
+            <Header>
               <input type="checkbox"></input>
-            </TableHeaderItem>
+            </Header>
             {Object.values(issueStatus).map((value) => {
-              return <th key={value}>{value}</th>;
+              return <Header key={value}>{value}</Header>;
             })}
           </TableRow>
           {issueList.map((val, i) => (
             <IssueTableRow key={i} issueParam={issueList[i]} />
           ))}
         </thead>
-      </IssueTableStyle>
-    </TableScroll>
+      </TableStyle>
+    </Scroll>
   );
 }

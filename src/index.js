@@ -6,15 +6,21 @@ import { store } from "./features/Store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import IssuePage from "./components/pages/IssuePage";
 import PullRequestPage from "./components/pages/PullRequestPage";
+import ProfilePage from "./components/pages/ProfilePage";
 import { IconContext } from "react-icons";
 import { GlobalStyle } from "./components/pages/Layout";
 import HeaderSection from "./components/organisms/HeaderSection";
 
-//Headerを共有する形で書く
+//TODO:Headerを共有する形で書く 対応中
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [],
+  },
+  {
+    path: "profile",
+    element: <ProfilePage />,
   },
   {
     path: "issue",
