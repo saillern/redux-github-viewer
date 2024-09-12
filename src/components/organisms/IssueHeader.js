@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { InputWindow } from "../atoms/Text";
 import { PrimaryButton } from "../atoms/Button";
-
 import AddIssueModal from "../organisms/AddIssueModal";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../features/ModalSlice";
+import { useState } from "react";
 
 const MainHeader = styled.div`
   display: flex;
@@ -22,14 +22,23 @@ const Flex = styled.div`
   display: flex;
 `;
 
-export default function IssueHeader({ isIssueHeader }) {
+export default function IssueHeader({ isIssueHeader, text, changeWord }) {
   const dispatch = useDispatch();
+  function changeText(e) {
+    //changeWord(e.target.value);
+    console.log(e.target.value);
+  }
   if (isIssueHeader) {
     return (
       <MainHeader>
         <h2>Issue</h2>
         <InputForm>
-          <InputWindow type="input" placeholder="issue名で検索"></InputWindow>
+          <InputWindow
+            type="input"
+            placeholder="issue名で検索"
+            value={text}
+            onChange={changeText}
+          />
         </InputForm>
         <Flex>
           <PrimaryButton isPrimary={true} onClick={() => dispatch(openModal())}>
