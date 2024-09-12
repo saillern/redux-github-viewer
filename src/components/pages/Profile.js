@@ -36,7 +36,7 @@ const Content = styled.p`
   font-size: 1.2rem;
 `;
 
-export default function ProfilePage() {
+export default function Profile() {
   return (
     <Body>
       <Section>

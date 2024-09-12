@@ -6,7 +6,7 @@ import { store } from "./features/Store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import IssuePage from "./components/pages/IssuePage";
 import PullRequestPage from "./components/pages/PullRequestPage";
-import ProfilePage from "./components/pages/ProfilePage";
+import Profile from "./components/pages/Profile";
 import { IconContext } from "react-icons";
 import { GlobalStyle } from "./components/pages/Layout";
 import HeaderSection from "./components/organisms/HeaderSection";
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "profile",
-    element: <ProfilePage />,
+    element: <Profile />,
   },
   {
     path: "issue",
