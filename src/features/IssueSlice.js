@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getDate } from "./GetDate";
+import { getDate } from "../utils/date";
 
 const issueInit = [
   {

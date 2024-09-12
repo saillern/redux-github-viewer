@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const Button = styled.a`
+//Fixed:色を引数で変更できる形式にする(前回レビュー箇所)
+export const Button = styled.a`
   cursor: pointer;
   display: block;
   width: 100%;
@@ -11,19 +12,25 @@ const Button = styled.a`
   font-size: 1rem;
   border-radius: 6px;
   width: auto;
-`;
-
-//TODO:色を引数で変更できる形にする
-export const PrimaryButton = styled(Button)`
-  color: white;
-  background: ${(props) =>
-    props.isPrimary ? "rgb(66, 195, 96)" : "rgb(215, 58, 73)"};
-  border-bottom: 2px solid
-    ${(props) => (props.isPrimary ? "rgb(40, 167, 69)" : " rgb(175, 28, 42)")};
-  &:hover {
-    background: ${(props) =>
-      props.isPrimary ? "rgb(40, 167, 69)" : "rgb(175, 28, 42)"};
-    border-bottom: 2px solid
-      ${(props) => (props.isPrimary ? "rgb(32, 132, 55)" : "rgb(103, 16, 25)")};
+  ${(props) =>
+    props.primary &&
+    css`
+      background: rgb(66, 195, 96);
+      color: white;
+      border-bottom: 2px solid rgb(40, 167, 69) &hover {
+        background: rgb(40, 167, 69);
+        border-bottom: 2px solid rgb(32, 132, 55);
+      }
+    `};
+  ${(props) =>
+    props.secondary &&
+    css`
+      background: rgb(215, 58, 73);
+      color: white;
+      border-bottom: 2px solid rgb(175, 28, 42) &hover {
+        background: rgb(175, 28, 42);
+        border-bottom: 2px solid rgb(103, 16, 25);
+      }
+    `};
   }
 `;

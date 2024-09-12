@@ -22,23 +22,22 @@ const MainSection = styled.div`
 export default function MainPage() {
   const [isIssuePage, setIsIssuePage] = useState(true);
 
-  //TODO:一つにまとめられないか考える
-  //
-  function issuePageClick() {
-    setIsIssuePage(true);
+  //Fixed:一つにまとめられないか考える(前回レビュー箇所)
+  function movePage(state) {
+    if (state === "Issue") setIsIssuePage(true);
+    else if (state === "Pull Request") setIsIssuePage(false);
   }
-  function pullRequestPageClick() {
-    setIsIssuePage(false);
-  }
-  //
   return (
     <>
       <Body>
         <Tab>
-          <TabSection isActive={isIssuePage} tabClick={issuePageClick}>
+          <TabSection isActive={isIssuePage} tabClick={() => movePage("Issue")}>
             Issue
           </TabSection>
-          <TabSection isActive={!isIssuePage} tabClick={pullRequestPageClick}>
+          <TabSection
+            isActive={!isIssuePage}
+            tabClick={() => movePage("Pull Request")}
+          >
             Pull Request
           </TabSection>
         </Tab>

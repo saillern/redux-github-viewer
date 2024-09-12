@@ -24,10 +24,11 @@ const Text = styled.div`
   width: 100%;
 `;
 
-export function TabSection(params) {
+//Fixed: 引数を展開した状態で書く (前回レビュー箇所)
+export function TabSection({ isActive, tabClick, children }) {
   return (
-    <Card $isActive={params.isActive} onClick={params.tabClick}>
-      <Text>{params.children}</Text>
+    <Card $isActive={isActive} onClick={tabClick}>
+      <Text>{children}</Text>
     </Card>
   );
 }
