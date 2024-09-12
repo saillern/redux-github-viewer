@@ -11,7 +11,7 @@ import { IconContext } from "react-icons";
 import { GlobalStyle } from "./components/pages/Layout";
 import HeaderSection from "./components/organisms/HeaderSection";
 
-//TODO:Headerを共有する形で書く 対応中
+//Fixed:Headerを共有する形で書く
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +30,6 @@ const router = createBrowserRouter([
     path: "pull-request",
     element: (
       <>
-        <HeaderSection />
         <PullRequestPage isOpen={true} />
       </>
     ),
@@ -42,6 +41,7 @@ root.render(
   <Provider store={store}>
     <IconContext.Provider value={{ color: "white", size: "1.2rem" }}>
       <GlobalStyle />
+      <HeaderSection />
       <RouterProvider router={router} />
     </IconContext.Provider>
   </Provider>,

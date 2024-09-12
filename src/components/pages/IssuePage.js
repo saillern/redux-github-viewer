@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import HeaderSection from "../organisms/HeaderSection";
 import IssueTableSection from "../organisms/IssueTable";
 import IssueHeader from "../organisms/IssueHeader";
-
 import { useState } from "react";
 
 const Body = styled.div`
@@ -26,7 +24,6 @@ export default function IssuePage() {
 
   return (
     <>
-      <HeaderSection />
       <Body>
         <Section>
           <IssueHeader
