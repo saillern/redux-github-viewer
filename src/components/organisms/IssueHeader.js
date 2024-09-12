@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { InputWindow } from "../atoms/Text";
-import { PrimaryButton } from "../atoms/Button";
+import { Button } from "../atoms/Button";
 import AddIssueModal from "../organisms/AddIssueModal";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../features/ModalSlice";
-import { useState } from "react";
 
 const MainHeader = styled.div`
   display: flex;
@@ -41,10 +40,10 @@ export default function IssueHeader({ isIssueHeader, text, changeWord }) {
           />
         </InputForm>
         <Flex>
-          <PrimaryButton isPrimary={true} onClick={() => dispatch(openModal())}>
+          <Button primary onClick={() => dispatch(openModal())}>
             New
-          </PrimaryButton>
-          <PrimaryButton isPrimary={false}>Delete </PrimaryButton>
+          </Button>
+          <Button secondary>Delete </Button>
           <AddIssueModal />
         </Flex>
       </MainHeader>

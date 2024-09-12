@@ -1,7 +1,7 @@
 import ReactModal from "react-modal";
 import styled from "styled-components";
 import { useState } from "react";
-import { PrimaryButton } from "../atoms/Button";
+import { Button } from "../atoms/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, modalState } from "../../features/ModalSlice";
 import { InputWindow, InputForm } from "../atoms/Text";
@@ -40,15 +40,6 @@ const Footer = styled.div`
   padding: 8px;
 `;
 
-const SecondaryButton = styled(PrimaryButton)`
-  color: rgb(3, 102, 214);
-  background: white;
-  border-bottom: white;
-  &:hover {
-    background: white;
-    border-bottom: white;
-  }
-`;
 export default function AddIssueModal() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -103,15 +94,10 @@ export default function AddIssueModal() {
         </Body>
         <Description />
         <Footer>
-          <PrimaryButton isPrimary={true} onClick={() => makeIssue()}>
+          <Button primary onClick={() => makeIssue()}>
             作成
-          </PrimaryButton>
-          <SecondaryButton
-            isPrimary={true}
-            onClick={() => dispatch(closeModal())}
-          >
-            閉じる
-          </SecondaryButton>
+          </Button>
+          <Button onClick={() => dispatch(closeModal())}>閉じる</Button>
         </Footer>
       </MainSection>
     </ReactModal>
