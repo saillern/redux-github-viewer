@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal, modalState } from "../../features/ModalSlice";
 import { InputWindow, InputForm } from "../atoms/Text";
 import { addIssue } from "../../features/IssueSlice";
-import { getDate } from "../../features/GetDate";
+import { getDate } from "../../utils/date";
 
 const MainSection = styled.div`
   max-width: 598px;
