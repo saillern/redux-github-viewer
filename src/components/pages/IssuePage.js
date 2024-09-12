@@ -16,6 +16,7 @@ const Section = styled.div`
 
 //TODO:useStateで書き換える
 let isIssuePage = true;
+//TODO:入力フォームのテキストをuseStateで管理する
 export default function IssuePage() {
   const [searchWord, setSearchWord] = useState("");
   function changeWordState(newWord) {

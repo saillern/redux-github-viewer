@@ -21,6 +21,7 @@ const Flex = styled.div`
   display: flex;
 `;
 
+//TODO: 入力フォームからテキストを拾う 対応中
 export default function IssueHeader({ isIssueHeader, text, changeWord }) {
   const dispatch = useDispatch();
   function changeText(e) {

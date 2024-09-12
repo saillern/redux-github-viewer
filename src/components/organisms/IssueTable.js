@@ -35,15 +35,13 @@ const issueStatus = {
   updated: "更新日付",
 };
 
-//TODO: Checkboxの動作 全選択とソート機能を追加
+//TODO: Checkboxの動作 全選択とソート機能を追加 対応中
 export default function IssueTable({ isIssuePage }) {
   const issueList = useSelector(issues);
-  const [num, setnum] = useState(issueList.length);
   const [checkedHeader, setCheckedHeader] = useState(false);
+  const [num, setnum] = useState(issueList.length);
   const [checked, setChecked] = useState(Array(num).fill(false));
-
   const [active, setActive] = useState(Array(num).fill(true));
-  const [search, setSearch] = useState("");
 
   function onClickHeader() {
     setCheckedHeader(!checkedHeader);
