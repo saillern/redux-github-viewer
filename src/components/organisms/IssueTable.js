@@ -8,7 +8,6 @@ const Scroll = styled.div`
   overflow: scroll;
 `;
 
-//Fixed: 個別に定義する (前回レビュー箇所)
 const Header = styled.th`
   padding: 8px;
   text-align: left;

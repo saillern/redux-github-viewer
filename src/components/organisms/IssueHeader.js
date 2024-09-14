@@ -25,8 +25,7 @@ const Flex = styled.div`
 export default function IssueHeader({ isIssueHeader, text, changeWord }) {
   const dispatch = useDispatch();
   function changeText(e) {
-    //changeWord(e.target.value);
-    console.log(e.target.value);
+    changeWord(e.target.value);
   }
   if (isIssueHeader) {
     return (

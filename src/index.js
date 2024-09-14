@@ -11,7 +11,6 @@ import { IconContext } from "react-icons";
 import { GlobalStyle } from "./components/pages/Layout";
 import HeaderSection from "./components/organisms/HeaderSection";
 
-//Fixed:Headerを共有する形で書く
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,7 +23,7 @@ const router = createBrowserRouter([
   },
   {
     path: "issue",
-    element: <IssuePage />,
+    element: <IssuePage isOpen={true}/>,
   },
   {
     path: "pull-request",

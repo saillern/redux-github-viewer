@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import IssueTableSection from "../organisms/IssueTable";
-import IssueHeader from "../organisms/IssueHeader";
-import { useState } from "react";
+import IssueSection from "../organisms/IssueSection";
 
 const Body = styled.div`
   max-width: 896px;
@@ -14,27 +12,12 @@ const Section = styled.div`
   margin-top: 16px;
 `;
 
-//TODO:useStateで書き換える
-let isIssuePage = true;
-//TODO:入力フォームのテキストをuseStateで管理する
-export default function IssuePage() {
-  const [searchWord, setSearchWord] = useState("");
-  function changeWordState(newWord) {
-    setSearchWord(newWord);
-  }
-
+export default function IssuePage({ isOpen }) {
   return (
-    <>
-      <Body>
-        <Section>
-          <IssueHeader
-            isIssueHeader={isIssuePage}
-            text={searchWord}
-            changeWord={() => changeWordState()}
-          />
-          <IssueTableSection isIssuePage={isIssuePage} />
-        </Section>
-      </Body>
-    </>
+    <Body>
+      <Section>
+        <IssueSection isOpen={isOpen} />
+      </Section>
+    </Body>
   );
 }
