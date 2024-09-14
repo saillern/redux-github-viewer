@@ -24,8 +24,7 @@ const Text = styled.div`
   width: 100%;
 `;
 
-//Fixed: 引数を展開した状態で書く (前回レビュー箇所)
-export function TabSection({ isActive, tabClick, children }) {
+export default function TabSection({ isActive, tabClick, children }) {
   return (
     <Card $isActive={isActive} onClick={tabClick}>
       <Text>{children}</Text>
