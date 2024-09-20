@@ -4,7 +4,6 @@ import { useState } from "react";
 
 export default function IssueSection({ isOpen }) {
   const [searchWord, setSearchWord] = useState("");
-  console.log(searchWord);
   return (
     <>
       <IssueHeader
@@ -12,7 +11,7 @@ export default function IssueSection({ isOpen }) {
         text={searchWord}
         changeWord={setSearchWord}
       />
-      <IssueTable isIssuePage={isOpen} />
+      <IssueTable isIssuePage={isOpen} searchWord={searchWord} />
     </>
   );
 }

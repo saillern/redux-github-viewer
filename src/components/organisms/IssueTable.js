@@ -18,6 +18,12 @@ const Header = styled.th`
   }
 `;
 
+const TableWarning = styled.td.attrs({ colSpan: "3" })`
+  padding: 8px;
+  text-align: left;
+  min-width: 10rem;
+`;
+
 const TableStyle = styled.table`
   border: 1px solid rgb(225, 228, 232);
   border-radius: 6px;
@@ -34,22 +40,31 @@ const issueStatus = {
   updated: "更新日付",
 };
 
-//TODO: Checkboxの動作 全選択とソート機能を追加 対応中
-export default function IssueTable({ isIssuePage }) {
+//TODO: Checkboxの動作 全選択と検索機能を追加
+export default function IssueTable({ isIssuePage, searchWord }) {
   const issueList = useSelector(issues);
   const [checkedHeader, setCheckedHeader] = useState(false);
   const [num, setnum] = useState(issueList.length);
   const [checked, setChecked] = useState(Array(num).fill(false));
-  const [active, setActive] = useState(Array(num).fill(true));
-
   function onClickHeader() {
     setCheckedHeader(!checkedHeader);
-    setChecked(checked.fill(!checkedHeader));
-    console.log(checked);
+    const nextChecked = Array(num).fill(!checkedHeader);
+    setChecked(nextChecked);
   }
 
-  function onClickCheckBox(i) {
-    setChecked(!checked[i]);
+  function searchIssue(i) {
+    const searchBoxFlag = issueList[i].title.includes(searchWord);
+    return searchBoxFlag;
+  }
+
+  function onClickCheckBox(index) {
+    const nextChecked = Object.values(checked).map((val, i) => {
+      if (i === index) {
+        return !val;
+      }
+      return val;
+    });
+    setChecked(nextChecked);
   }
   if (!isIssuePage) return;
   return (
@@ -68,15 +83,17 @@ export default function IssueTable({ isIssuePage }) {
               return <Header key={value}>{value}</Header>;
             })}
           </tr>
-          {issueList.map(
-            (val, i) =>
-              active[i] && (
-                <IssueTableRow
-                  key={i}
-                  issueParam={[issueList[i], checked[i]]}
-                />
-              ),
-          )}
+          {issueList.map((val, i) => (
+            <IssueTableRow
+              key={val}
+              isActive={searchIssue(i)}
+              id={i}
+              list={issueList[i]}
+              checked={checked[i]}
+              handleCheck={onClickCheckBox}
+            />
+          ))}
+          <TableWarning>aaaa</TableWarning>
         </thead>
       </TableStyle>
     </Scroll>

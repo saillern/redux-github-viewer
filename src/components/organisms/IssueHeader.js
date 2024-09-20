@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { InputWindow } from "../atoms/Text";
 import { Button } from "../atoms/Button";
-import AddIssueModal from "../organisms/AddIssueModal";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../features/ModalSlice";
 
@@ -21,7 +20,6 @@ const Flex = styled.div`
   display: flex;
 `;
 
-//TODO: 入力フォームからテキストを拾う 対応中
 export default function IssueHeader({ isIssueHeader, text, changeWord }) {
   const dispatch = useDispatch();
   function changeText(e) {
@@ -44,7 +42,6 @@ export default function IssueHeader({ isIssueHeader, text, changeWord }) {
             New
           </Button>
           <Button secondary>Delete </Button>
-          <AddIssueModal />
         </Flex>
       </MainHeader>
     );
