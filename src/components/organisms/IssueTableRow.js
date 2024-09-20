@@ -18,14 +18,29 @@ const Row = styled.tr`
     background-color: rgb(198, 218, 230, 0.25);
   }
 `;
-export default function IssueTableRow({ issueParam }) {
-  const { title, status, author, createBy } = issueParam[0];
-  const Ischecked = issueParam[1];
+export default function IssueTableRow({
+  id,
+  isActive,
+  list,
+  checked,
+  handleCheck,
+}) {
+  const { title, status, author, createBy } = list;
+  const isChecked = checked;
   const dispatch = useDispatch();
+  function handleClick(e, id) {
+    e.stopPropagation();
+    handleCheck(id);
+  }
+  if (!isActive) return;
   return (
     <Row onClick={() => dispatch(openModal())}>
       <Item>
-        <input type="checkbox" checked={Ischecked}></input>
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onClick={(e) => handleClick(e, id)}
+        ></input>
       </Item>
       <Item className="outline">{title}</Item>
       <Item>{status}</Item>

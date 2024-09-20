@@ -34,9 +34,14 @@ export const issueSlice = createSlice({
         state.push(action.payload);
       },
     },
+    deleteIssue: {
+      reducer: (state, action) => {
+        return state.filter((val, i) => i != action.payload);
+      },
+    },
   },
 });
 
-export const { addIssue } = issueSlice.actions;
+export const { addIssue, deleteIssue } = issueSlice.actions;
 export const issues = (state) => state.issue;
 export default issueSlice.reducer;
