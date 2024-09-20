@@ -1,7 +1,7 @@
 import ReactModal from "react-modal";
 import styled from "styled-components";
 import { useState } from "react";
-import { Button } from "../atoms/Button";
+import Button from "../atoms/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, modalState } from "../../features/ModalSlice";
 import { InputWindow, InputForm } from "../atoms/Text";
@@ -94,7 +94,7 @@ export default function AddIssueModal() {
         </Body>
         <Description />
         <Footer>
-          <Button primary onClick={() => makeIssue()}>
+          <Button variant={"primary"} onClick={() => makeIssue()}>
             作成
           </Button>
           <Button onClick={() => dispatch(closeModal())}>閉じる</Button>

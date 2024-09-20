@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { InputWindow } from "../atoms/Text";
-import { Button } from "../atoms/Button";
+import Button from "../atoms/Button";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../features/ModalSlice";
 
@@ -38,10 +38,10 @@ export default function IssueHeader({ isIssueHeader, text, changeWord }) {
           />
         </InputForm>
         <Flex>
-          <Button primary onClick={() => dispatch(openModal())}>
+          <Button variant={"primary"} onClick={() => dispatch(openModal())}>
             New
           </Button>
-          <Button secondary>Delete </Button>
+          <Button variant={"secondary"}>Delete </Button>
         </Flex>
       </MainHeader>
     );
