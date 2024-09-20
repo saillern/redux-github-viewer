@@ -40,7 +40,7 @@ const Footer = styled.div`
   padding: 8px;
 `;
 
-export default function AddIssueModal() {
+export default function AddIssueModal({ addPram }) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const isOpen = useSelector(modalState);
@@ -58,6 +58,7 @@ export default function AddIssueModal() {
     dispatch(closeModal());
     setTitle("");
     setText("");
+    addPram();
   }
   return (
     <ReactModal isOpen={isOpen}>
