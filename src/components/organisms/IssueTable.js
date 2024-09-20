@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { issues } from "../../features/IssueSlice";
 import IssueTableRow from "./IssueTableRow";
+import TableWarning from "../molecules/TableWarning";
 
 const Scroll = styled.div`
   overflow: scroll;
@@ -16,12 +17,6 @@ const Header = styled.th`
   &:first-child {
     min-width: auto;
   }
-`;
-
-const TableWarning = styled.td.attrs({ colSpan: "3" })`
-  padding: 8px;
-  text-align: left;
-  min-width: 10rem;
 `;
 
 const TableStyle = styled.table`
@@ -43,20 +38,27 @@ const issueStatus = {
 //TODO: Checkboxの動作 全選択と検索機能を追加
 export default function IssueTable({ isIssuePage, searchWord }) {
   const issueList = useSelector(issues);
+  const num = issueList.length;
   const [checkedHeader, setCheckedHeader] = useState(false);
-  const [num, setnum] = useState(issueList.length);
   const [checked, setChecked] = useState(Array(num).fill(false));
   function onClickHeader() {
     setCheckedHeader(!checkedHeader);
     const nextChecked = Array(num).fill(!checkedHeader);
     setChecked(nextChecked);
   }
-
   function searchIssue(i) {
     const searchBoxFlag = issueList[i].title.includes(searchWord);
     return searchBoxFlag;
   }
 
+  function noIndex() {
+    for (let i = 0; i < checked.length; i++) {
+      if (searchIssue(i)) return false;
+    }
+    return true;
+  }
+  console.log(checked);
+  console.log(noIndex());
   function onClickCheckBox(index) {
     const nextChecked = Object.values(checked).map((val, i) => {
       if (i === index) {
@@ -93,7 +95,7 @@ export default function IssueTable({ isIssuePage, searchWord }) {
               handleCheck={onClickCheckBox}
             />
           ))}
-          <TableWarning>aaaa</TableWarning>
+          <TableWarning isActive={noIndex()}>データがありません</TableWarning>
         </thead>
       </TableStyle>
     </Scroll>
