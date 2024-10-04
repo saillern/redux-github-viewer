@@ -24,21 +24,18 @@ const Flex = styled.div`
 export default function IssueHeader({
   text,
   changeWord,
-  selectedTable,
-  checkList,
+  checkedIssue,
+  onDelete,
 }) {
   const dispatch = useDispatch();
   function changeText(e) {
     changeWord(e.target.value);
-    selectedTable(e.target.value);
   }
-  //TODO:Issueを削除する
-  //checkListやテーブル表示も調整する
-  function deleteIssues() {
-    const num = checkList.length - 1;
-    checkList.reverse().map((check, i) => {
-      if (check) {
-        dispatch(deleteIssue(Math.abs(i - num)));
+  function handleDelete() {
+    checkedIssue.forEach((checked, id) => {
+      if (checked) {
+        dispatch(deleteIssue(id));
+        onDelete(id);
       }
     });
   }
@@ -57,7 +54,7 @@ export default function IssueHeader({
         <Button variant={"primary"} onClick={() => dispatch(openModal())}>
           New
         </Button>
-        <Button variant={"secondary"} onClick={() => deleteIssues()}>
+        <Button variant={"secondary"} onClick={() => handleDelete()}>
           Delete{" "}
         </Button>
       </Flex>

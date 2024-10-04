@@ -16,7 +16,8 @@ const LinkButton = styled.a`
 const PrimaryButton = styled(LinkButton)`
   background: rgb(66, 195, 96);
   color: white;
-  border-bottom: 2px solid rgb(40, 167, 69) &hover {
+  border-bottom: 2px solid rgb(40, 167, 69);
+   &:hover {
     background: rgb(40, 167, 69);
     border-bottom: 2px solid rgb(32, 132, 55);
 `;
@@ -24,7 +25,8 @@ const PrimaryButton = styled(LinkButton)`
 const SecondaryButton = styled(LinkButton)`
   background: rgb(215, 58, 73);
   color: white;
-  border-bottom: 2px solid rgb(175, 28, 42) &hover {
+  border-bottom: 2px solid rgb(175, 28, 42);
+  &:hover {
     background: rgb(175, 28, 42);
     border-bottom: 2px solid rgb(103, 16, 25);
   }

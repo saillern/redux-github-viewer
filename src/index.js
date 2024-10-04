@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { Provider } from "react-redux";
-import { store } from "./features/Store";
+import { store } from "./features/store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import IssuePage from "./components/pages/IssuePage";
 import PullRequestPage from "./components/pages/PullRequestPage";
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   },
   {
     path: "issue",
-    element: <IssuePage isOpen={true}/>,
+    element: <IssuePage isOpen={true} />,
   },
   {
     path: "pull-request",
