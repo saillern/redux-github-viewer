@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { issues } from "../../features/IssueSlice";
@@ -38,46 +38,55 @@ const issueStatus = {
 };
 
 export default function IssueTable({ isIssuePage }) {
+  const issueId = new Map();
   const issueList = useSelector(issues);
-  const num = issueList.length;
+  issueList.forEach((value) => {
+    const id = value.uuid;
+    issueId.set(id, value);
+  });
+
   const [searchWord, setSearchWord] = useState("");
-  const [checkedHeader, setCheckedHeader] = useState(false);
-  const [checked, setChecked] = useState(Array(num).fill(false));
-  const [selectd, setSelected] = useState(Array(num).fill(true));
-  function onClickHeaderCheckBox() {
-    setCheckedHeader(!checkedHeader);
-    const nextChecked = Array(num).fill(!checkedHeader);
-    setChecked(nextChecked);
+  const [allCheck, setAllCheck] = useState(false);
+
+  const nextChecked = new Map();
+  for (const value of issueId) {
+    const uuid = value[0];
+    nextChecked.set(uuid, false);
   }
-  function searchIssues(word) {
-    const nextSelected = selectd.map((val, i) => {
-      return issueList[i].title.includes(word);
+  const [checked, setChecked] = useState(nextChecked);
+
+  function onClickAllCheck() {
+    const next = new Map();
+    checked.forEach((value, key) => {
+      next.set(key, !allCheck);
     });
-    setSelected(nextSelected);
+    setChecked(next);
+    setAllCheck(!allCheck);
   }
 
-  function noColumns() {
-    for (let i = 0; i < checked.length; i++) {
-      if (selectd[i]) return false;
-    }
-    return true;
-  }
-  function onClickCheckBox(index) {
-    const nextChecked = Object.values(checked).map((val, i) => {
-      if (i === index) {
-        return !val;
-      }
-      return val;
+  const filteredIssues = useMemo(
+    () =>
+      issueList.filter((it) => !searchWord || it.title.includes(searchWord)),
+    [searchWord, issueId],
+  );
+  const filteredAll = filteredIssues.length === 0;
+
+  function onClickCheckBox(id) {
+    const nextChecked = new Map();
+    checked.forEach((value, key) => {
+      nextChecked.set(key, key != id ? value : !value);
     });
     setChecked(nextChecked);
   }
-  function addParam() {
-    setChecked([...checked, false]);
-    setSelected([...selectd, true]);
+  function createIssue(id) {
+    const nextChecked = checked;
+    nextChecked.set(id, false);
+    setChecked(nextChecked);
   }
-  function deleteParam(index) {
-    setChecked(checked.filter((val, i) => i != index));
-    setSelected(selectd.filter((val, i) => i != index));
+  function deleteIssue(id) {
+    const nextChecked = checked;
+    nextChecked.delete(id);
+    setChecked(nextChecked);
   }
   if (!isIssuePage) return;
   return (
@@ -85,9 +94,8 @@ export default function IssueTable({ isIssuePage }) {
       <IssueHeader
         text={searchWord}
         changeWord={setSearchWord}
-        selectedTable={searchIssues}
-        checkList={checked}
-        deleteIssue={deleteParam}
+        checkedIssue={checked}
+        onDelete={deleteIssue}
       />
       <Scroll>
         <TableStyle>
@@ -96,30 +104,28 @@ export default function IssueTable({ isIssuePage }) {
               <Header>
                 <input
                   type="checkbox"
-                  checked={checkedHeader}
-                  onClick={() => onClickHeaderCheckBox()}
+                  checked={allCheck}
+                  onClick={() => onClickAllCheck()}
                 ></input>
               </Header>
               {Object.values(issueStatus).map((value) => {
                 return <Header key={value}>{value}</Header>;
               })}
             </tr>
-            {issueList.map((val, i) => (
+            {filteredIssues.map((value) => (
               <IssueTableRow
-                key={val}
-                isActive={selectd[i]}
-                id={i}
-                list={issueList[i]}
-                checked={checked[i]}
-                handleCheck={onClickCheckBox}
+                key={value.uuid}
+                list={issueId.get(value.uuid)}
+                active={checked.get(value.uuid)}
+                onCheck={onClickCheckBox}
               />
             ))}
-            <TableWarning isActive={noColumns()}>
+            <TableWarning isActive={filteredAll}>
               データがありません
             </TableWarning>
           </thead>
         </TableStyle>
-        <AddIssueModal addPram={addParam} />
+        <AddIssueModal onSubmit={createIssue} />
       </Scroll>
     </>
   );

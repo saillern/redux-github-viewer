@@ -7,8 +7,8 @@ export const modalSlice = createSlice({
     id: 0,
   },
   reducers: {
-    openModal: (state) => {
-      state.show = true;
+    openModal: (state, action) => {
+      state.show = [true, action.payload];
     },
     closeModal: (state) => {
       state.show = false;

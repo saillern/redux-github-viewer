@@ -14,32 +14,24 @@ const Item = styled.td`
 
 const Row = styled.tr`
   cursor: pointer;
-  &:hover td {
+  &:hover {
     background-color: rgb(198, 218, 230, 0.25);
   }
 `;
-export default function IssueTableRow({
-  id,
-  isActive,
-  list,
-  checked,
-  handleCheck,
-}) {
-  const { title, status, author, createBy } = list;
-  const isChecked = checked;
+export default function IssueTableRow({ list, active, onCheck }) {
+  const { uuid, title, status, author, createBy } = list;
   const dispatch = useDispatch();
   function handleClick(e, id) {
     e.stopPropagation();
-    handleCheck(id);
+    onCheck(id);
   }
-  if (!isActive) return;
   return (
-    <Row onClick={() => dispatch(openModal())}>
+    <Row onClick={() => dispatch(openModal(list))}>
       <Item>
         <input
           type="checkbox"
-          checked={isChecked}
-          onClick={(e) => handleClick(e, id)}
+          checked={active}
+          onClick={(e) => handleClick(e, uuid)}
         ></input>
       </Item>
       <Item className="outline">{title}</Item>

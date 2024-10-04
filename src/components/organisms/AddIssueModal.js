@@ -5,7 +5,7 @@ import Button from "../atoms/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal, modalState } from "../../features/ModalSlice";
 import { InputWindow, InputForm } from "../atoms/Text";
-import { addIssue } from "../../features/IssueSlice";
+import { addIssue, editIssue } from "../../features/IssueSlice";
 import { getDate } from "../../utils/date";
 
 const MainSection = styled.div`
@@ -40,28 +40,74 @@ const Footer = styled.div`
   padding: 8px;
 `;
 
-export default function AddIssueModal({ addPram }) {
+export default function AddIssueModal({ onSubmit }) {
+  const dispatch = useDispatch();
+  const isOpen = useSelector(modalState)[0];
+  const readIssue = useSelector(modalState)[1];
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const isOpen = useSelector(modalState);
-  const dispatch = useDispatch();
+  const [status, setStatus] = useState("Open");
+  const state = !readIssue ? "Open" : readIssue.status;
+  const buttonText = !readIssue ? "作成" : "更新";
+  const newId = crypto.randomUUID();
+
   function makeIssue() {
     const created = getDate();
     const issue = {
+      uuid: newId,
       title: title,
       description: text,
-      status: "Open",
+      status: status,
       author: "",
       createBy: created,
     };
     dispatch(addIssue(issue));
+    onSubmit(newId);
+  }
+
+  function changeIssue() {
+    const issue = {
+      uuid: readIssue.uuid,
+      title: title,
+      description: text,
+      status: status,
+      author: readIssue.author,
+      createBy: readIssue.createBy,
+    };
+    dispatch(editIssue(issue));
+  }
+  function initialize() {
+    setTitle(!readIssue ? "" : readIssue.title);
+    setText(!readIssue ? "" : readIssue.description);
+  }
+  function handleChange(e) {
+    setStatus(e.target.value);
+  }
+  function updateIssue() {
+    if (!readIssue) makeIssue();
+    else changeIssue();
     dispatch(closeModal());
     setTitle("");
     setText("");
-    addPram();
+  }
+  function SelectState() {
+    if (!readIssue) return;
+    return (
+      <Section>
+        <SubTitle>ステータス</SubTitle>
+        <select
+          name="selectStatus"
+          defaultValue={state}
+          onChange={handleChange}
+        >
+          <option value="Open">Open</option>
+          <option value="Close">Close</option>
+        </select>
+      </Section>
+    );
   }
   return (
-    <ReactModal isOpen={isOpen}>
+    <ReactModal isOpen={isOpen} onAfterOpen={() => initialize()}>
       <MainSection>
         <Header>Issueを追加</Header>
         <Body>
@@ -85,18 +131,12 @@ export default function AddIssueModal({ addPram }) {
               onChange={(event) => setText(event.target.value)}
             ></InputForm>
           </Section>
-          <Section>
-            <SubTitle>ステータス</SubTitle>
-            <select>
-              <option value="Open">Open</option>
-              <option value="Close">Close</option>
-            </select>
-          </Section>
         </Body>
+        <SelectState />
         <Description />
         <Footer>
-          <Button variant={"primary"} onClick={() => makeIssue()}>
-            作成
+          <Button variant={"primary"} onClick={() => updateIssue()}>
+            {buttonText}
           </Button>
           <Button onClick={() => dispatch(closeModal())}>閉じる</Button>
         </Footer>
