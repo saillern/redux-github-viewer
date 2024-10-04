@@ -32,11 +32,10 @@ export default function IssueHeader({
     changeWord(e.target.value);
   }
   function handleDelete() {
-    console.log(checkedIssue);
-    checkedIssue.forEach((value, key) => {
-      if (value) {
-        dispatch(deleteIssue(key));
-        onDelete(key);
+    checkedIssue.forEach((checked, id) => {
+      if (checked) {
+        dispatch(deleteIssue(id));
+        onDelete(id);
       }
     });
   }
