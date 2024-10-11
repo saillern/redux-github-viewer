@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { issueSlice } from "./IssueSlice";
-import { modalSlice } from "./ModalSlice";
+import { issueSlice } from "./issueSlice";
+import { modalSlice } from "./modalSlice";
 
 export const store = configureStore({
   reducer: {

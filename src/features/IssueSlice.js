@@ -3,7 +3,7 @@ import { getDate } from "../utils/date";
 
 const issueInit = [
   {
-    uuid: crypto.randomUUID(),
+    id: crypto.randomUUID(),
     title: "A bug in Top Page",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     status: "Open",
@@ -11,7 +11,7 @@ const issueInit = [
     createBy: getDate(),
   },
   {
-    uuid: crypto.randomUUID(),
+    id: crypto.randomUUID(),
     title: "A problem of performance in Top Page",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     status: "Close",
@@ -19,7 +19,7 @@ const issueInit = [
     createBy: getDate(),
   },
   {
-    uuid: crypto.randomUUID(),
+    id: crypto.randomUUID(),
     title: "fix layout",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     status: "Close",
@@ -34,28 +34,21 @@ export const issueSlice = createSlice({
   reducers: {
     addIssue: {
       reducer: (state, action) => {
+        action.payload.id = crypto.randomUUID();
         state.push(action.payload);
       },
     },
     deleteIssue: {
       reducer: (state, action) => {
-        return state.filter((issue) => issue.uuid != action.payload);
+        return state.filter((issue) => issue.id != action.payload);
       },
     },
     editIssue: {
       reducer: (state, action) => {
-        return state.map((issue) =>
-          issue.uuid === action.payload.uuid
-            ? {
-                uuid: action.payload.uuid,
-                title: action.payload.title,
-                description: action.payload.description,
-                status: action.payload.status,
-                author: action.payload.author,
-                createBy: action.payload.createBy,
-              }
-            : issue,
-        );
+        const index = state.findIndex((obj) => {
+          return obj.id === action.payload.id;
+        });
+        state[index] = action.payload;
       },
     },
   },
