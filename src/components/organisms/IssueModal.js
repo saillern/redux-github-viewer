@@ -43,8 +43,7 @@ const Footer = styled.div`
 
 export default function AddIssueModal() {
   const dispatch = useDispatch();
-  const isOpen = useSelector(modalState).isOpen;
-  const issue = useSelector(modalState).id;
+  const { isOpen, issue } = useSelector(modalState);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [status, setStatus] = useState("Open");

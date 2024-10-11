@@ -39,12 +39,10 @@ const issueStatus = {
 
 export default function IssueTable({ isIssuePage }) {
   const issueList = useSelector(issues);
-  const issueId = {};
-  const ids = [];
+  const idList = [];
   issueList.forEach((value) => {
     const id = value.id;
-    issueId[id] = value;
-    ids.push(id);
+    idList.push(id);
   });
 
   const [searchWord, setSearchWord] = useState("");
@@ -53,18 +51,18 @@ export default function IssueTable({ isIssuePage }) {
 
   function onClickAllCheck() {
     if (allCheck) setChecked([]);
-    else setChecked(ids);
+    else setChecked(idList);
     setAllCheck(!allCheck);
   }
 
   const filteredIssues = useMemo(
     () =>
       issueList.filter((it) => !searchWord || it.title.includes(searchWord)),
-    [searchWord, issueId],
+    [searchWord, issueList],
   );
   const filteredAll = filteredIssues.length === 0;
 
-  function onClickCheckBox(current, id) {
+  function onCheckIssue(current, id) {
     if (current) {
       const nextChecked = checked.concat(id);
       setChecked(nextChecked);
@@ -101,7 +99,7 @@ export default function IssueTable({ isIssuePage }) {
                 key={value.id}
                 issue={value}
                 active={checked.includes(value.id)}
-                onCheck={onClickCheckBox}
+                onCheck={onCheckIssue}
               />
             ))}
             <TableWarning isActive={filteredAll}>
