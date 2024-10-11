@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { useState } from "react";
 import Button from "../atoms/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, modalState } from "../../features/ModalSlice";
+import { closeModal, modalState } from "../../features/modalSlice";
 import { InputWindow, InputForm } from "../atoms/Text";
-import { addIssue, editIssue } from "../../features/IssueSlice";
+import { addIssue, editIssue } from "../../features/issueSlice";
 import { getDate } from "../../utils/date";
+import { SelectState } from "./SelectState";
 
 const MainSection = styled.div`
   max-width: 598px;
@@ -40,71 +41,50 @@ const Footer = styled.div`
   padding: 8px;
 `;
 
-export default function AddIssueModal({ onSubmit }) {
+export default function AddIssueModal() {
   const dispatch = useDispatch();
-  const isOpen = useSelector(modalState)[0];
-  const readIssue = useSelector(modalState)[1];
+  const isOpen = useSelector(modalState).isOpen;
+  const issue = useSelector(modalState).id;
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [status, setStatus] = useState("Open");
-  const state = !readIssue ? "Open" : readIssue.status;
-  const buttonText = !readIssue ? "作成" : "更新";
-  const newId = crypto.randomUUID();
+  const state = !issue ? "Open" : issue.status;
+  const buttonText = !issue ? "作成" : "更新";
 
   function makeIssue() {
     const created = getDate();
-    const issue = {
-      uuid: newId,
-      title: title,
+    const newIssue = {
+      title,
       description: text,
-      status: status,
+      status,
       author: "",
       createBy: created,
     };
-    dispatch(addIssue(issue));
-    onSubmit(newId);
+    dispatch(addIssue(newIssue));
   }
 
   function changeIssue() {
-    const issue = {
-      uuid: readIssue.uuid,
-      title: title,
+    const nextIssue = {
+      id: issue.id,
+      title,
       description: text,
-      status: status,
-      author: readIssue.author,
-      createBy: readIssue.createBy,
+      status,
+      author: issue.author,
+      createBy: issue.createBy,
     };
-    dispatch(editIssue(issue));
+    dispatch(editIssue(nextIssue));
   }
   function initialize() {
-    setTitle(!readIssue ? "" : readIssue.title);
-    setText(!readIssue ? "" : readIssue.description);
+    setTitle(!issue ? "" : issue.title);
+    setText(!issue ? "" : issue.description);
   }
-  function handleChange(e) {
+  function getStatus(e) {
     setStatus(e.target.value);
   }
   function updateIssue() {
-    if (!readIssue) makeIssue();
+    if (!issue) makeIssue();
     else changeIssue();
     dispatch(closeModal());
-    setTitle("");
-    setText("");
-  }
-  function SelectState() {
-    if (!readIssue) return;
-    return (
-      <Section>
-        <SubTitle>ステータス</SubTitle>
-        <select
-          name="selectStatus"
-          defaultValue={state}
-          onChange={handleChange}
-        >
-          <option value="Open">Open</option>
-          <option value="Close">Close</option>
-        </select>
-      </Section>
-    );
   }
   return (
     <ReactModal isOpen={isOpen} onAfterOpen={() => initialize()}>
@@ -132,7 +112,11 @@ export default function AddIssueModal({ onSubmit }) {
             ></InputForm>
           </Section>
         </Body>
-        <SelectState />
+        <SelectState
+          active={issue}
+          initState={state}
+          handleChange={getStatus}
+        />
         <Description />
         <Footer>
           <Button variant={"primary"} onClick={() => updateIssue()}>

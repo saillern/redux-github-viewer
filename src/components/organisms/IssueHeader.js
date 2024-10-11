@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { InputWindow } from "../atoms/Text";
 import Button from "../atoms/Button";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../features/ModalSlice";
-import { deleteIssue } from "../../features/IssueSlice";
+import { openModal } from "../../features/modalSlice";
+import { deleteIssue } from "../../features/issueSlice";
 
 const MainHeader = styled.div`
   display: flex;
@@ -21,22 +21,14 @@ const Flex = styled.div`
   display: flex;
 `;
 
-export default function IssueHeader({
-  text,
-  changeWord,
-  checkedIssue,
-  onDelete,
-}) {
+export default function IssueHeader({ text, changeWord, checkedIssue }) {
   const dispatch = useDispatch();
   function changeText(e) {
     changeWord(e.target.value);
   }
   function handleDelete() {
-    checkedIssue.forEach((checked, id) => {
-      if (checked) {
-        dispatch(deleteIssue(id));
-        onDelete(id);
-      }
+    checkedIssue.forEach((id) => {
+      dispatch(deleteIssue(id));
     });
   }
   return (

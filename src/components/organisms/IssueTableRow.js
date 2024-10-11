@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../features/ModalSlice";
+import { openModal } from "../../features/modalSlice";
 
 const Item = styled.td`
   padding: 8px;
@@ -18,20 +18,20 @@ const Row = styled.tr`
     background-color: rgb(198, 218, 230, 0.25);
   }
 `;
-export default function IssueTableRow({ list, active, onCheck }) {
-  const { uuid, title, status, author, createBy } = list;
+export default function IssueTableRow({ issue, active, onCheck }) {
+  const { id, title, status, author, createBy } = issue;
   const dispatch = useDispatch();
-  function handleClick(e, id) {
+  function handleClick(e) {
     e.stopPropagation();
-    onCheck(id);
+    onCheck(e.target.checked, id);
   }
   return (
-    <Row onClick={() => dispatch(openModal(list))}>
+    <Row onClick={() => dispatch(openModal(issue))}>
       <Item>
         <input
           type="checkbox"
           checked={active}
-          onClick={(e) => handleClick(e, uuid)}
+          onClick={(e) => handleClick(e)}
         ></input>
       </Item>
       <Item className="outline">{title}</Item>
