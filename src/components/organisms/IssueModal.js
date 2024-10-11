@@ -86,7 +86,7 @@ export default function AddIssueModal() {
     dispatch(closeModal());
   }
   return (
-    <ReactModal isOpen={isOpen} onAfterOpen={() => initialize()}>
+    <ReactModal isOpen={isOpen} onAfterOpen={initialize}>
       <MainSection>
         <Header>Issueを追加</Header>
         <Body>
@@ -97,7 +97,7 @@ export default function AddIssueModal() {
               placeholder="タイトルを入力してください"
               id="titleForm"
               value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
             ></InputWindow>
           </Section>
           <Section>
@@ -107,7 +107,7 @@ export default function AddIssueModal() {
               placeholder="説明を入力してください"
               id="textForm"
               value={text}
-              onChange={(event) => setText(event.target.value)}
+              onChange={(e) => setText(e.target.value)}
             ></InputForm>
           </Section>
         </Body>
