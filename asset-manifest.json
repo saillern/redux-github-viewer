@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/redux-github-viewer/static/js/main.ef0e29a6.js",
+    "index.html": "/redux-github-viewer/index.html",
+    "main.ef0e29a6.js.map": "/redux-github-viewer/static/js/main.ef0e29a6.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.ef0e29a6.js"
+  ]
+}
