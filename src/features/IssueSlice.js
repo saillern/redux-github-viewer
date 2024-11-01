@@ -35,12 +35,15 @@ export const issueSlice = createSlice({
     addIssue: {
       reducer: (state, action) => {
         action.payload.id = crypto.randomUUID();
-        state.push(action.payload);
+        state.push({
+          id: crypto.randomUUID(),
+          ...action.payload,
+        });
       },
     },
     deleteIssue: {
       reducer: (state, action) => {
-        return state.filter((issue) => issue.id != action.payload);
+        state = state.fitler((issue) => issue.id != action.payload);
       },
     },
     editIssue: {
@@ -48,6 +51,7 @@ export const issueSlice = createSlice({
         const index = state.findIndex((obj) => {
           return obj.id === action.payload.id;
         });
+        if (index === -1) return;
         state[index] = action.payload;
       },
     },

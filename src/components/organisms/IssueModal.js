@@ -13,6 +13,7 @@ const MainSection = styled.div`
   max-width: 598px;
   margin: auto;
 `;
+
 const Header = styled.h2`
   padding: 0px 8px;
 `;
@@ -41,20 +42,48 @@ const Footer = styled.div`
   padding: 8px;
 `;
 
+const modalStyle = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.75)",
+  },
+  content: {
+    position: "absolute",
+    top: "40px",
+    left: "40px",
+    right: "40px",
+    bottom: "40px",
+    border: "1px solid #ccc",
+    background: "#fff",
+    overflow: "auto",
+    WebkitOverflowScrolling: "touch",
+    borderRadius: "4px",
+    outline: "none",
+    padding: "20px",
+    margin: "auto",
+    width: "60%",
+  },
+};
 export default function AddIssueModal() {
   const dispatch = useDispatch();
   const { isOpen, issue } = useSelector(modalState);
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [description, setDescription] = useState("");
   const [status, setStatus] = useState("Open");
-  const state = !issue ? "Open" : issue.status;
-  const buttonText = !issue ? "作成" : "更新";
+  const create = !issue;
+  const state = create ? "Open" : issue.status;
+  const buttonText = create ? "作成" : "更新";
+  console.log(typeof ReactModal);
 
   function makeIssue() {
     const created = getDate();
     const newIssue = {
       title,
-      description: text,
+      description,
       status,
       author: "",
       createBy: created,
@@ -64,29 +93,32 @@ export default function AddIssueModal() {
 
   function changeIssue() {
     const nextIssue = {
-      id: issue.id,
+      ...issue,
       title,
-      description: text,
+      description,
       status,
-      author: issue.author,
-      createBy: issue.createBy,
     };
     dispatch(editIssue(nextIssue));
   }
   function initialize() {
-    setTitle(!issue ? "" : issue.title);
-    setText(!issue ? "" : issue.description);
+    setTitle(create ? "" : issue.title);
+    setDescription(create ? "" : issue.description);
   }
   function getStatus(e) {
     setStatus(e.target.value);
   }
   function updateIssue() {
-    if (!issue) makeIssue();
+    if (create) makeIssue();
     else changeIssue();
     dispatch(closeModal());
   }
   return (
-    <ReactModal isOpen={isOpen} onAfterOpen={initialize}>
+    <ReactModal
+      isOpen={isOpen}
+      onAfterOpen={initialize}
+      onRequestClose={() => dispatch(closeModal())}
+      style={modalStyle}
+    >
       <MainSection>
         <Header>Issueを追加</Header>
         <Body>
@@ -106,8 +138,8 @@ export default function AddIssueModal() {
               type="input"
               placeholder="説明を入力してください"
               id="textForm"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             ></InputForm>
           </Section>
         </Body>

@@ -9,7 +9,12 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     font-size: 14px;
     padding: 0px;
-    margin: 0;
+    margin: 0px;
+  }
+  h1{
+    font-size:2rem;
+    padding:0px;
+    margin:0px; 
   }
   a{
     color: rgb(3,102,214);
