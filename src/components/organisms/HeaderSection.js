@@ -4,6 +4,9 @@ import { HamburgerMenu } from "../molecules/HamburgerMenu";
 import { useState } from "react";
 
 const Header = styled.div`
+  a {
+    text-decoration: none;
+  }
   display: flex;
   padding: 16px;
   -webkit-box-pack: justify;
@@ -13,9 +16,6 @@ const Header = styled.div`
   width: 100%;
   background: rgb(51, 51, 51);
   color: white;
-  a {
-    text-decoration: none;
-  }
 `;
 
 const Title = styled.a`
@@ -47,12 +47,10 @@ const Text = styled.a`
 `;
 
 const Menubar = styled.div`
-  padding: 8px;
   cursor: pointer;
 `;
 
 const MenuLink = styled.div`
-  padding: 8px;
   font-size: 1.2rem;
 `;
 
@@ -65,7 +63,7 @@ export default function HeaderSection() {
   return (
     <Header>
       <Title>
-        <TitleText href={`/`}>Github Viewer</TitleText>
+        <TitleText href={`/`}>Github&nbsp;Viewer</TitleText>
       </Title>
       <List>
         <ListText>

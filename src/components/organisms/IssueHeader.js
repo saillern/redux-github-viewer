@@ -11,9 +11,12 @@ const MainHeader = styled.div`
   align-items: center;
 `;
 
-const InputForm = styled.div`
+const Tile = styled.div`
   padding: 8px 16px;
+  width: 100%;
   display: flex;
+`;
+const InputForm = styled.div`
   width: 100%;
 `;
 
@@ -34,14 +37,16 @@ export default function IssueHeader({ text, changeWord, checkedIssue }) {
   return (
     <MainHeader>
       <h2>Issue</h2>
-      <InputForm>
-        <InputWindow
-          type="input"
-          placeholder="issue名で検索"
-          value={text}
-          onChange={changeText}
-        />
-      </InputForm>
+      <Tile>
+        <InputForm>
+          <InputWindow
+            type="input"
+            placeholder="issue名で検索"
+            value={text}
+            onChange={changeText}
+          />
+        </InputForm>
+      </Tile>
       <Flex>
         <Button variant={"primary"} onClick={() => dispatch(openModal())}>
           New

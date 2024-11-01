@@ -85,7 +85,11 @@ export default function AddIssueModal() {
     dispatch(closeModal());
   }
   return (
-    <ReactModal isOpen={isOpen} onAfterOpen={initialize}>
+    <ReactModal
+      isOpen={isOpen}
+      onAfterOpen={initialize}
+      style={{ content: { width: "60%", margin: "auto" } }}
+    >
       <MainSection>
         <Header>Issueを追加</Header>
         <Body>
