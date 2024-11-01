@@ -58,7 +58,6 @@ export default function HeaderSection() {
   const [isOpen, setIsOpen] = useState(false);
   function changeMenuState() {
     setIsOpen(!isOpen);
-    //TODO:画面外をクリックした時にMenuを閉じる機能実装
   }
   return (
     <Header>

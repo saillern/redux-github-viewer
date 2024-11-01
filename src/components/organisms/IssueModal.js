@@ -13,6 +13,7 @@ const MainSection = styled.div`
   max-width: 598px;
   margin: auto;
 `;
+
 const Header = styled.h2`
   padding: 0px 8px;
 `;
@@ -41,6 +42,32 @@ const Footer = styled.div`
   padding: 8px;
 `;
 
+const modalStyle = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.75)",
+  },
+  content: {
+    position: "absolute",
+    top: "40px",
+    left: "40px",
+    right: "40px",
+    bottom: "40px",
+    border: "1px solid #ccc",
+    background: "#fff",
+    overflow: "auto",
+    WebkitOverflowScrolling: "touch",
+    borderRadius: "4px",
+    outline: "none",
+    padding: "20px",
+    margin: "auto",
+    width: "60%",
+  },
+};
 export default function AddIssueModal() {
   const dispatch = useDispatch();
   const { isOpen, issue } = useSelector(modalState);
@@ -50,6 +77,7 @@ export default function AddIssueModal() {
   const create = !issue;
   const state = create ? "Open" : issue.status;
   const buttonText = create ? "作成" : "更新";
+  console.log(typeof ReactModal);
 
   function makeIssue() {
     const created = getDate();
@@ -88,7 +116,8 @@ export default function AddIssueModal() {
     <ReactModal
       isOpen={isOpen}
       onAfterOpen={initialize}
-      style={{ content: { width: "60%", margin: "auto" } }}
+      onRequestClose={() => dispatch(closeModal())}
+      style={modalStyle}
     >
       <MainSection>
         <Header>Issueを追加</Header>
