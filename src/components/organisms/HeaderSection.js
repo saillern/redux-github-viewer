@@ -62,7 +62,7 @@ export default function HeaderSection() {
   return (
     <Header>
       <Title>
-        <TitleText href={`/`}>Github&nbsp;Viewer</TitleText>
+        <TitleText href={`/`}>Github Viewer</TitleText>
       </Title>
       <List>
         <ListText>
