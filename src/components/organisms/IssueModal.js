@@ -45,16 +45,17 @@ export default function AddIssueModal() {
   const dispatch = useDispatch();
   const { isOpen, issue } = useSelector(modalState);
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [description, setDescription] = useState("");
   const [status, setStatus] = useState("Open");
-  const state = !issue ? "Open" : issue.status;
-  const buttonText = !issue ? "作成" : "更新";
+  const create = !issue;
+  const state = create ? "Open" : issue.status;
+  const buttonText = create ? "作成" : "更新";
 
   function makeIssue() {
     const created = getDate();
     const newIssue = {
       title,
-      description: text,
+      description,
       status,
       author: "",
       createBy: created,
@@ -64,24 +65,22 @@ export default function AddIssueModal() {
 
   function changeIssue() {
     const nextIssue = {
-      id: issue.id,
+      ...issue,
       title,
-      description: text,
+      description,
       status,
-      author: issue.author,
-      createBy: issue.createBy,
     };
     dispatch(editIssue(nextIssue));
   }
   function initialize() {
-    setTitle(!issue ? "" : issue.title);
-    setText(!issue ? "" : issue.description);
+    setTitle(create ? "" : issue.title);
+    setDescription(create ? "" : issue.description);
   }
   function getStatus(e) {
     setStatus(e.target.value);
   }
   function updateIssue() {
-    if (!issue) makeIssue();
+    if (create) makeIssue();
     else changeIssue();
     dispatch(closeModal());
   }
@@ -106,8 +105,8 @@ export default function AddIssueModal() {
               type="input"
               placeholder="説明を入力してください"
               id="textForm"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             ></InputForm>
           </Section>
         </Body>

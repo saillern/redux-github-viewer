@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { LargeFont, ListFont } from "../atoms/Text";
 import { FaBars } from "react-icons/fa";
 import { HamburgerMenu } from "../molecules/HamburgerMenu";
 import { useState } from "react";
@@ -19,15 +18,16 @@ const Header = styled.div`
   }
 `;
 
-const Title = styled(LargeFont)`
+const Title = styled.a`
   white-space: nowrap;
+  color: white;
   &:hover {
     cursor: pointer;
   }
 `;
 
-const TitleText = styled.a`
-  color: white;
+const TitleText = styled.h1`
+  white-space: nowrap;
 `;
 
 const List = styled.ul`
@@ -35,9 +35,12 @@ const List = styled.ul`
   width: 100%;
   padding: 0px 32px;
 `;
-const ListText = styled(ListFont)`
+const ListText = styled.li`
+  margin-right: 16px;
+`;
+const Text = styled.a`
+  font-size: 1.1rem;
   color: white;
-  padding-right: 16px;
   &:hover {
     cursor: pointer;
   }
@@ -50,7 +53,7 @@ const Menubar = styled.div`
 
 const MenuLink = styled.div`
   padding: 8px;
-  font-size: 12px;
+  font-size: 1.2rem;
 `;
 
 export default function HeaderSection() {
@@ -62,11 +65,15 @@ export default function HeaderSection() {
   return (
     <Header>
       <Title>
-        <TitleText href={`/`}>GitHub Viewer</TitleText>
+        <TitleText href={`/`}>Github Viewer</TitleText>
       </Title>
       <List>
-        <ListText href={`/issue`}>Issue</ListText>
-        <ListText href={`/pull-request`}>Pull Request</ListText>
+        <ListText>
+          <Text href={`/issue`}>Issue</Text>
+        </ListText>
+        <ListText>
+          <Text href={`/pull-request`}>Pull Request</Text>
+        </ListText>
       </List>
       <MenuLink>
         <Menubar onClick={() => changeMenuState()}>
