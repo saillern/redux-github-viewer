@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { activeMenuBar } from "./Reducer";
-import { issueListSlice } from "./IssueTableSlice";
+import { issueSlice } from "./issueSlice";
+import { modalSlice } from "./modalSlice";
 
 export const store = configureStore({
   reducer: {
-    menuState: activeMenuBar.reducer,
-    issues: issueListSlice.reducer,
+    issue: issueSlice.reducer,
+    modalState: modalSlice.reducer,
   },
 });

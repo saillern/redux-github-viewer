@@ -1,35 +1,49 @@
-import React from "react";
-import { DisplayIssueHeader, TabPage } from "./IssuePage";
-import IssueTableSection from "../organisms/IssueTableSection";
-import { MainPage, MainTab, MainSection } from "../molecules/MainPagePart";
+import styled from "styled-components";
+import IssueSection from "../organisms/IssueSection";
+import TabSection from "../organisms/TabSection";
+import PullRequestPage from "./PullRequestPage";
+import { useState } from "react";
 
-let isIssuePage = true;
-let isPullRequestPage = false;
+const Body = styled.div`
+  max-width: 896px;
+  margin: 0px auto;
+  padding: 32px 16px;
+`;
 
-export default function BodySection() {
-  function issuePageClick() {}
-  function pullRequestPageClick() {}
+const MainSection = styled.div`
+  padding: 16px;
+  margin-top: 16px;
+`;
 
+const Tab = styled.ul`
+  display: flex;
+`;
+
+export default function MainPage() {
+  const [isIssuePage, setIsIssuePage] = useState(true);
+  function movePage(state) {
+    if (state === "Issue") setIsIssuePage(true);
+    else if (state === "Pull Request") setIsIssuePage(false);
+  }
   return (
     <>
-      <MainPage>
-        <MainTab>
-          <TabPage
-            children={"Issue"}
-            isActive={isIssuePage}
-            tabClick={issuePageClick}
-          />
-          <TabPage
-            children={"Pull Request"}
-            isActive={isPullRequestPage}
-            tabClick={pullRequestPageClick}
-          />
-        </MainTab>
+      <Body>
+        <Tab>
+          <TabSection isActive={isIssuePage} tabClick={() => movePage("Issue")}>
+            Issue
+          </TabSection>
+          <TabSection
+            isActive={!isIssuePage}
+            tabClick={() => movePage("Pull Request")}
+          >
+            Pull Request
+          </TabSection>
+        </Tab>
         <MainSection>
-          <DisplayIssueHeader isIssueHeader={isIssuePage} />
-          <IssueTableSection isIssuePage={isIssuePage} />
+          <IssueSection isOpen={isIssuePage} />
+          <PullRequestPage isOpen={!isIssuePage} />
         </MainSection>
-      </MainPage>
+      </Body>
     </>
   );
 }

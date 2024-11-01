@@ -1,12 +1,12 @@
-import React from "react";
 import styled from "styled-components";
-import { HeaderTitle, HeaderListText } from "../molecules/HeaderPart";
 import { FaBars } from "react-icons/fa";
-import { OpenHamburgerMenu } from "../molecules/HamburgerMenu";
-import { handleMenuBar, openMenuState } from "../../features/Reducer";
-import { useDispatch, useSelector } from "react-redux";
+import { HamburgerMenu } from "../molecules/HamburgerMenu";
+import { useState } from "react";
 
-const HeaderFormat = styled.div`
+const Header = styled.div`
+  a {
+    text-decoration: none;
+  }
   display: flex;
   padding: 16px;
   -webkit-box-pack: justify;
@@ -16,52 +16,68 @@ const HeaderFormat = styled.div`
   width: 100%;
   background: rgb(51, 51, 51);
   color: white;
-  a {
-    text-decoration: none;
+`;
+
+const Title = styled.a`
+  white-space: nowrap;
+  color: white;
+  &:hover {
+    cursor: pointer;
   }
 `;
 
-const HeaderLink = styled.a`
-  color: white;
+const TitleText = styled.h1`
+  white-space: nowrap;
 `;
-const HeaderListFormat = styled.ul`
+
+const List = styled.ul`
   display: flex;
   width: 100%;
   padding: 0px 32px;
 `;
-
-const HeaderList = styled(HeaderListText)`
-  padding-right: 16px;
+const ListText = styled.li`
+  margin-right: 16px;
+`;
+const Text = styled.a`
+  font-size: 1.1rem;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Menubar = styled.div`
-  padding: 8px;
   cursor: pointer;
 `;
 
 const MenuLink = styled.div`
-  padding: 8px;
-  font-size: 12px;
+  font-size: 1.2rem;
 `;
 
 export default function HeaderSection() {
-  const dispatch = useDispatch();
-  const openMenu = useSelector(openMenuState);
+  const [isOpen, setIsOpen] = useState(false);
+  function changeMenuState() {
+    setIsOpen(!isOpen);
+  }
   return (
-    <HeaderFormat>
-      <HeaderTitle>
-        <HeaderLink href={`/`}>GitHub Viewer</HeaderLink>
-      </HeaderTitle>
-      <HeaderListFormat>
-        <HeaderList href={`/issue`}>Issue</HeaderList>
-        <HeaderList href={`/pull-request`}>Pull Request</HeaderList>
-      </HeaderListFormat>
+    <Header>
+      <Title>
+        <TitleText href={`/`}>Github Viewer</TitleText>
+      </Title>
+      <List>
+        <ListText>
+          <Text href={`/issue`}>Issue</Text>
+        </ListText>
+        <ListText>
+          <Text href={`/pull-request`}>Pull Request</Text>
+        </ListText>
+      </List>
       <MenuLink>
-        <Menubar onClick={() => dispatch(handleMenuBar())}>
+        <Menubar onClick={() => changeMenuState()}>
           <FaBars />
         </Menubar>
-        <OpenHamburgerMenu isOpen={openMenu} />
+        <HamburgerMenu isOpen={isOpen} />
       </MenuLink>
-    </HeaderFormat>
+    </Header>
   );
 }
