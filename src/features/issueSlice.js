@@ -43,7 +43,7 @@ export const issueSlice = createSlice({
     },
     deleteIssue: {
       reducer: (state, action) => {
-        state = state.fitler((issue) => issue.id != action.payload);
+        state = state.fitler((issue) => issue.id !== action.payload);
       },
     },
     editIssue: {

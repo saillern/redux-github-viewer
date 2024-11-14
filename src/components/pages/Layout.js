@@ -31,4 +31,11 @@ export const GlobalStyle = createGlobalStyle`
     padding:0px;
     margin:0px;
   }
+  @media screen and (max-width:576px){
+    .ReactModal__Content{
+      width:100%; !important;
+      right: 0px !important;
+      left: 0px !important;
+    }
+  }
 `;
