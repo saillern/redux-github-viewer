@@ -13,20 +13,19 @@ import HeaderSection from "./components/organisms/HeaderSection";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/redux-github-viewer/",
     element: <App />,
-    children: [],
   },
   {
-    path: "profile",
+    path: "/redux-github-viewer/profile",
     element: <Profile />,
   },
   {
-    path: "issue",
+    path: "/redux-github-viewer/issue",
     element: <IssuePage isOpen={true} />,
   },
   {
-    path: "pull-request",
+    path: "/redux-github-viewer/pull-request",
     element: (
       <>
         <PullRequestPage isOpen={true} />
