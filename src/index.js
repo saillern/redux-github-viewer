@@ -13,7 +13,7 @@ import HeaderSection from "./components/organisms/HeaderSection";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/redux-github-viewer",
     element: <App />,
     children: [],
   },

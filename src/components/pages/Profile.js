@@ -40,7 +40,7 @@ export default function Profile() {
   return (
     <Body>
       <Section>
-        <Title>Prifile</Title>
+        <Title>Profile</Title>
         <Card>
           <Tile>
             <Label>プロフィール</Label>
