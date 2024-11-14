@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/redux-github-viewer/static/js/main.59b32bf4.js",
+    "main.js": "/redux-github-viewer/static/js/main.21179602.js",
     "index.html": "/redux-github-viewer/index.html",
-    "main.59b32bf4.js.map": "/redux-github-viewer/static/js/main.59b32bf4.js.map"
+    "main.21179602.js.map": "/redux-github-viewer/static/js/main.21179602.js.map"
   },
   "entrypoints": [
-    "static/js/main.59b32bf4.js"
+    "static/js/main.21179602.js"
   ]
 }
