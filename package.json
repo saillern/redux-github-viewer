@@ -2,7 +2,7 @@
   "name": "redux-github-viewer",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://saillern.github.io/redux-github-viewer",
+  "homepage": "https://saillern.github.io/redux-github-viewer/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "react-scripts build",
+    "predeploy": "react-scripts build && cp build/index.html build/404.html",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
