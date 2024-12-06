@@ -62,14 +62,14 @@ export default function HeaderSection() {
   return (
     <Header>
       <Title>
-        <TitleText href={`/`}>Github Viewer</TitleText>
+        <TitleText href={`/redux-github-viewer/`}>Github Viewer</TitleText>
       </Title>
       <List>
         <ListText>
-          <Text href={`/issue`}>Issue</Text>
+          <Text href={`/redux-github-viewer/issue`}>Issue</Text>
         </ListText>
         <ListText>
-          <Text href={`/pull-request`}>Pull Request</Text>
+          <Text href={`/redux-github-viewer/pull-request`}>Pull Request</Text>
         </ListText>
       </List>
       <MenuLink>

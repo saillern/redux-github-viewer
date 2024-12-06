@@ -29,10 +29,14 @@ export function HamburgerMenu({ isOpen }) {
   if (!isOpen) return;
   return (
     <MenuBarList>
-      <MenuBarText href={`/`}>Top</MenuBarText>
-      <MenuBarText href={`/profile`}>You Profile</MenuBarText>
-      <MenuBarText href={`/issue`}>Issue</MenuBarText>
-      <MenuBarText href={`/pull-request`}>Pull Request</MenuBarText>
+      <MenuBarText href={`/redux-github-viewer/`}>Top</MenuBarText>
+      <MenuBarText href={`/redux-github-viewer/profile`}>
+        You Profile
+      </MenuBarText>
+      <MenuBarText href={`/redux-github-viewer/issue`}>Issue</MenuBarText>
+      <MenuBarText href={`/redux-github-viewer/pull-request`}>
+        Pull Request
+      </MenuBarText>
     </MenuBarList>
   );
 }
