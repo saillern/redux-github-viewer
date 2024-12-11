@@ -77,7 +77,6 @@ export default function AddIssueModal() {
   const create = !issue;
   const state = create ? "Open" : issue.status;
   const buttonText = create ? "作成" : "更新";
-  console.log(typeof ReactModal);
 
   function makeIssue() {
     const created = getDate();
