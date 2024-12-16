@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import React from "react";
 
 const MenuBarList = styled.div`
@@ -29,14 +30,18 @@ export function HamburgerMenu({ isOpen }) {
   if (!isOpen) return;
   return (
     <MenuBarList>
-      <MenuBarText href={`/redux-github-viewer/`}>Top</MenuBarText>
-      <MenuBarText href={`/redux-github-viewer/profile`}>
-        You Profile
-      </MenuBarText>
-      <MenuBarText href={`/redux-github-viewer/issue`}>Issue</MenuBarText>
-      <MenuBarText href={`/redux-github-viewer/pull-request`}>
-        Pull Request
-      </MenuBarText>
+      <Link to="/">
+        <MenuBarText>Top</MenuBarText>
+      </Link>
+      <Link to="/profile">
+        <MenuBarText>You Profile</MenuBarText>
+      </Link>
+      <Link to="/issue">
+        <MenuBarText>Issue</MenuBarText>
+      </Link>
+      <Link to="/pull-request">
+        <MenuBarText>Pull Request</MenuBarText>
+      </Link>
     </MenuBarList>
   );
 }
