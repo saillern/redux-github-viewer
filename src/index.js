@@ -15,13 +15,12 @@ const router = createHashRouter(
   [
     {
       path: "/",
-      element: (
-        <>
-          <HeaderSection />
-          <App />
-        </>
-      ),
+      element: <HeaderSection />,
       children: [
+        {
+          path: "/",
+          element: <App />,
+        },
         {
           path: "/profile",
           element: <Profile />,

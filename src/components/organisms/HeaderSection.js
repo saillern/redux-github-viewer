@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { FaBars } from "react-icons/fa";
 import { HamburgerMenu } from "../molecules/HamburgerMenu";
 import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 
 const Header = styled.div`
   a {
@@ -60,24 +61,33 @@ export default function HeaderSection() {
     setIsOpen(!isOpen);
   }
   return (
-    <Header>
-      <Title>
-        <TitleText href={`/redux-github-viewer/`}>Github Viewer</TitleText>
-      </Title>
-      <List>
-        <ListText>
-          <Text href={`/redux-github-viewer/issue`}>Issue</Text>
-        </ListText>
-        <ListText>
-          <Text href={`/redux-github-viewer/pull-request`}>Pull Request</Text>
-        </ListText>
-      </List>
-      <MenuLink>
-        <Menubar onClick={() => changeMenuState()}>
-          <FaBars />
-        </Menubar>
-        <HamburgerMenu isOpen={isOpen} />
-      </MenuLink>
-    </Header>
+    <>
+      <Header>
+        <Link to="/">
+          <Title>
+            <TitleText>Github Viewer</TitleText>
+          </Title>
+        </Link>
+        <List>
+          <Link to="/issue">
+            <ListText>
+              <Text>Issue</Text>
+            </ListText>
+          </Link>
+          <Link to="/pull-request">
+            <ListText>
+              <Text>Pull Request</Text>
+            </ListText>
+          </Link>
+        </List>
+        <MenuLink>
+          <Menubar onClick={() => changeMenuState()}>
+            <FaBars />
+          </Menubar>
+          <HamburgerMenu isOpen={isOpen} />
+        </MenuLink>
+      </Header>
+      <Outlet />
+    </>
   );
 }
