@@ -41,7 +41,7 @@ const router = createHashRouter(
     },
   ],
   {
-    basename: "/redux-github-viewer",
+    basename: "/",
   },
 );
 
